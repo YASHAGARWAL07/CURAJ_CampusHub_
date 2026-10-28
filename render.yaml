@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: cu-hub
+    runtime: node
+    buildCommand: npm install
+    startCommand: node server/server.js
+    healthCheckPath: /api/stats
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: "20"
+      - key: DATABASE_URL
+        sync: false          # Set this in Render dashboard → Environment
+      - key: ADMIN_USER
+        sync: false
+      - key: ADMIN_PASS_HASH
+        sync: false
+      - key: ADMIN_TOKEN_HASH
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false          # Free at https://aistudio.google.com/app/apikey
+      - key: WEAVIATE_URL
+        sync: false          # URL of the Weaviate Cloud cluster containing Curaj_Data
+      - key: WEAVIATE_API_KEY
+        sync: false          # Weaviate Cloud API key
+      - key: WEAVIATE_COLLECTION
+        value: Curaj_Data
+      - key: GEMINI_MODEL
+        value: gemini-3.8-flash
+      - key: ALLOWED_ORIGIN
+        sync: false          # Optional — your Render domain, e.g. https://cu-hub.onrender.com
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false          # From Cloudinary Dashboard → API Keys
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false

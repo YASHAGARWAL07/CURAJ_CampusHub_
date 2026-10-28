@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<meta name="robots" content="noindex, nofollow">
+<title>CU Hub — Admin</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090f;--surface:#0e1117;--surface2:#141824;--surface3:#1a2030;--surface4:#202840;
+  --border:#1d2535;--border2:#243048;--border3:#2d3d5a;
+  --primary:#6366f1;--primary-dark:#4f46e5;--primary-glow:rgba(99,102,241,.18);
+  --green:#10b981;--red:#ef4444;--yellow:#f59e0b;--blue:#3b82f6;
+  --purple:#8b5cf6;--pink:#ec4899;--cyan:#06b6d4;--orange:#f97316;
+  --text:#f0f4ff;--text2:#8b9cc8;--text3:#4a5880;--text4:#2d3a54;
+  --mono:'JetBrains Mono',monospace;--sans:'Inter',sans-serif;
+  --radius:10px;--radius-lg:16px;--radius-xl:20px;
+  --sidebar:240px;
+  --shadow:0 4px 24px rgba(0,0,0,.4);
+  --shadow-lg:0 8px 48px rgba(0,0,0,.6);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{font-size:14px;scroll-behavior:smooth;}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+
+/* ══ SCROLLBAR ══════════════════════════════════════════════ */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border3);border-radius:99px;}
+::-webkit-scrollbar-thumb:hover{background:var(--text3);}
+
+/* ══ LOGIN ══════════════════════════════════════════════════ */
+#loginScreen{
+  position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;
+  justify-content:center;z-index:9999;padding:1rem;
+  background-image:
+    radial-gradient(ellipse 60% 50% at 20% 40%,rgba(99,102,241,.07) 0%,transparent 100%),
+    radial-gradient(ellipse 40% 60% at 80% 60%,rgba(139,92,246,.05) 0%,transparent 100%);
+}
+.login-wrap{width:100%;max-width:420px;}
+.login-brand{display:flex;align-items:center;gap:.75rem;margin-bottom:2.5rem;}
+.login-brand-icon{
+  width:42px;height:42px;border-radius:12px;
+  background:linear-gradient(135deg,var(--primary),#7c3aed);
+  display:grid;place-items:center;box-shadow:0 0 24px rgba(99,102,241,.4);
+}
+.login-brand-icon svg{width:22px;height:22px;color:#fff;}
+.login-brand-name{font-size:1.125rem;font-weight:800;letter-spacing:-.02em;}
+.login-brand-name span{color:var(--primary);}
+.login-card{
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:var(--radius-xl);padding:2rem;
+  box-shadow:var(--shadow-lg),0 0 0 1px rgba(99,102,241,.08);
+}
+.login-label{
+  display:inline-flex;align-items:center;gap:.375rem;
+  padding:.25rem .75rem;border-radius:99px;font-size:.6875rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.06em;margin-bottom:1.5rem;
+  background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:var(--red);
+}
+.login-title{font-size:1.375rem;font-weight:800;letter-spacing:-.025em;margin-bottom:.375rem;}
+.login-sub{font-size:.8125rem;color:var(--text2);margin-bottom:1.75rem;line-height:1.5;}
+.field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1rem;}
+.field label{font-size:.6875rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;}
+.field input{
+  padding:.75rem 1rem;background:var(--surface2);border:1px solid var(--border2);
+  border-radius:var(--radius);color:var(--text);font-family:var(--mono);font-size:.875rem;
+  outline:none;transition:border-color .2s,box-shadow .2s;
+}
+.field input:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(99,102,241,.12);}
+.field input::placeholder{color:var(--text3);}
+.login-btn{
+  width:100%;padding:.8125rem 1.5rem;margin-top:.5rem;
+  background:linear-gradient(135deg,var(--primary),#7c3aed);
+  border:none;border-radius:var(--radius);color:#fff;
+  font-family:var(--sans);font-size:.9375rem;font-weight:700;
+  cursor:pointer;transition:all .2s;letter-spacing:-.01em;
+  box-shadow:0 4px 20px rgba(99,102,241,.35);
+}
+.login-btn:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 28px rgba(99,102,241,.45);}
+.login-btn:disabled{opacity:.55;cursor:not-allowed;transform:none;}
+.login-error{
+  margin-top:.875rem;padding:.75rem 1rem;font-size:.8125rem;font-weight:600;
+  background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);
+  border-radius:var(--radius);color:var(--red);display:none;
+}
+.login-hint{
+  margin-top:1.25rem;padding:.875rem 1rem;background:var(--surface2);
+  border:1px solid var(--border);border-radius:var(--radius);
+  font-size:.75rem;color:var(--text3);line-height:1.6;
+}
+.login-hint code{color:var(--cyan);font-family:var(--mono);}
+
+/* ══ MAIN APP ═══════════════════════════════════════════════ */
+#adminApp{display:none;min-height:100vh;}
+.layout{display:grid;grid-template-columns:var(--sidebar) 1fr;min-height:100vh;}
+
+/* ══ SIDEBAR ════════════════════════════════════════════════ */
+.sidebar{
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  padding:0;
+}
+.sidebar-header{
+  padding:1.25rem 1rem 1rem;
+  border-bottom:1px solid var(--border);
+}
+.sidebar-brand{display:flex;align-items:center;gap:.625rem;}
+.sb-icon{
+  width:32px;height:32px;border-radius:8px;
+  background:linear-gradient(135deg,var(--primary),#7c3aed);
+  display:grid;place-items:center;flex-shrink:0;
+}
+.sb-icon svg{width:17px;height:17px;color:#fff;}
+.sb-name{font-size:.9375rem;font-weight:800;letter-spacing:-.02em;}
+.sb-badge{font-size:.5625rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;display:block;margin-top:.1rem;}
+.sidebar-nav{flex:1;padding:.625rem .625rem;display:flex;flex-direction:column;gap:2px;}
+.nav-group{margin-top:.875rem;}
+.nav-group:first-child{margin-top:.25rem;}
+.nav-section{
+  font-size:.5625rem;font-weight:800;color:var(--text4);
+  text-transform:uppercase;letter-spacing:.1em;
+  padding:.25rem .375rem .5rem;
+}
+.nav-btn{
+  display:flex;align-items:center;gap:.625rem;padding:.5rem .625rem;
+  background:transparent;border:none;border-radius:8px;
+  color:var(--text2);font-family:var(--sans);font-size:.8125rem;font-weight:600;
+  cursor:pointer;transition:all .15s;text-align:left;width:100%;
+}
+.nav-btn:hover{background:var(--surface2);color:var(--text);}
+.nav-btn.active{background:rgba(99,102,241,.15);color:var(--primary);}
+.nav-btn.active .nb-icon{color:var(--primary);}
+.nb-icon{width:16px;height:16px;flex-shrink:0;color:var(--text3);transition:color .15s;}
+.nb-count{
+  margin-left:auto;padding:.1rem .4375rem;
+  background:var(--surface3);border-radius:99px;
+  font-size:.625rem;font-weight:700;color:var(--text3);
+  font-family:var(--mono);
+}
+.nav-btn.active .nb-count{background:rgba(99,102,241,.2);color:var(--primary);}
+.sidebar-footer{
+  padding:.875rem .75rem;border-top:1px solid var(--border);
+}
+.dev-info{
+  padding:.625rem .75rem;background:var(--surface2);
+  border-radius:var(--radius);border:1px solid var(--border);
+  margin-bottom:.625rem;
+}
+.dev-name{font-size:.8125rem;font-weight:700;}
+.dev-role{font-size:.6875rem;color:var(--text3);margin-top:.125rem;}
+.logout-btn{
+  width:100%;padding:.5rem;background:rgba(239,68,68,.08);
+  border:1px solid rgba(239,68,68,.15);border-radius:8px;
+  color:var(--red);font-family:var(--sans);font-size:.75rem;
+  font-weight:700;cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:.375rem;
+}
+.logout-btn:hover{background:rgba(239,68,68,.16);}
+
+/* ══ MAIN CONTENT ════════════════════════════════════════════ */
+.main{flex:1;overflow-x:auto;}
+.page{display:none;padding:1.75rem;animation:pageIn .2s ease;}
+.page.active{display:block;}
+@keyframes pageIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ══ PAGE HEADER ═════════════════════════════════════════════ */
+.page-hd{margin-bottom:1.5rem;}
+.page-hd h1{font-size:1.5rem;font-weight:800;letter-spacing:-.03em;display:flex;align-items:center;gap:.625rem;}
+.page-hd p{font-size:.8125rem;color:var(--text2);margin-top:.25rem;}
+.page-actions{display:flex;gap:.625rem;margin-top:.875rem;flex-wrap:wrap;align-items:center;}
+
+/* ══ STAT CARDS ══════════════════════════════════════════════ */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:.875rem;margin-bottom:1.75rem;}
+.stat-card{
+  padding:1.125rem;background:var(--surface);border:1px solid var(--border2);
+  border-radius:var(--radius-lg);cursor:pointer;transition:all .2s;
+  position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,currentColor 0%,transparent 70%);
+  opacity:0;transition:opacity .2s;
+}
+.stat-card:hover{border-color:var(--border3);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.3);}
+.stat-card:hover::before{opacity:.04;}
+.sc-icon{
+  width:32px;height:32px;border-radius:8px;
+  display:grid;place-items:center;margin-bottom:.75rem;font-size:1rem;
+}
+.sc-label{font-size:.625rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--text3);margin-bottom:.375rem;}
+.sc-value{font-size:1.75rem;font-weight:800;font-family:var(--mono);letter-spacing:-.03em;line-height:1;}
+.sc-sub{font-size:.6875rem;color:var(--text3);margin-top:.375rem;}
+.sc-trend{
+  display:inline-flex;align-items:center;gap:.25rem;
+  font-size:.6875rem;font-weight:700;margin-top:.375rem;
+  padding:.125rem .5rem;border-radius:99px;
+}
+
+/* ══ TABLE CARD ══════════════════════════════════════════════ */
+.tcard{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;}
+.tcard-toolbar{
+  display:flex;align-items:center;gap:.75rem;padding:.875rem 1rem;
+  border-bottom:1px solid var(--border);flex-wrap:wrap;
+}
+.tcard-title{font-size:.9375rem;font-weight:700;flex:1;}
+.tcard-count{font-size:.75rem;color:var(--text3);font-family:var(--mono);}
+.search-box{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.4375rem .75rem;background:var(--surface2);
+  border:1px solid var(--border2);border-radius:8px;
+}
+.search-box svg{width:13px;height:13px;color:var(--text3);flex-shrink:0;}
+.search-box input{
+  background:none;border:none;outline:none;color:var(--text);
+  font-family:var(--mono);font-size:.75rem;width:180px;
+}
+.search-box input::placeholder{color:var(--text3);}
+.tcard-wrap{overflow-x:auto;max-height:560px;overflow-y:auto;}
+table{width:100%;border-collapse:collapse;font-size:.75rem;}
+thead{position:sticky;top:0;z-index:2;}
+th{
+  padding:.625rem 1rem;text-align:left;font-size:.5625rem;font-weight:800;
+  color:var(--text3);text-transform:uppercase;letter-spacing:.07em;
+  background:var(--surface2);border-bottom:1px solid var(--border2);white-space:nowrap;
+}
+td{
+  padding:.625rem 1rem;border-bottom:1px solid var(--border);
+  color:var(--text2);vertical-align:middle;
+}
+tr:last-child td{border-bottom:none;}
+tr:hover td{background:rgba(255,255,255,.015);}
+.cm{color:var(--text);font-weight:600;}
+.cmono{font-family:var(--mono);font-size:.6875rem;}
+.ctrunc{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:200px;display:block;}
+.loading-row td,.empty-row td{padding:2.5rem;text-align:center;color:var(--text3);font-style:italic;}
+
+/* ══ BADGES ══════════════════════════════════════════════════ */
+.badge{display:inline-flex;align-items:center;gap:.25rem;padding:.2rem .5rem;border-radius:99px;font-size:.5625rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;}
+.bg{background:rgba(16,185,129,.1);color:var(--green);border:1px solid rgba(16,185,129,.2);}
+.br{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2);}
+.by{background:rgba(245,158,11,.1);color:var(--yellow);border:1px solid rgba(245,158,11,.2);}
+.bb{background:rgba(59,130,246,.1);color:var(--blue);border:1px solid rgba(59,130,246,.2);}
+.bp{background:rgba(139,92,246,.1);color:var(--purple);border:1px solid rgba(139,92,246,.2);}
+.bc{background:rgba(6,182,212,.1);color:var(--cyan);border:1px solid rgba(6,182,212,.2);}
+.bo{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2);}
+.bgr{background:rgba(100,116,139,.08);color:var(--text3);border:1px solid var(--border);}
+
+/* ══ ACTION BUTTONS ══════════════════════════════════════════ */
+.actions{display:flex;gap:.3rem;flex-wrap:wrap;}
+.btn{
+  padding:.3rem .625rem;border:none;border-radius:6px;
+  font-family:var(--sans);font-size:.6875rem;font-weight:700;
+  cursor:pointer;transition:all .15s;white-space:nowrap;
+  display:inline-flex;align-items:center;gap:.3rem;
+}
+.btn svg{width:11px;height:11px;}
+.btn-edit{background:rgba(59,130,246,.1);color:var(--blue);}
+.btn-edit:hover{background:rgba(59,130,246,.2);}
+.btn-del{background:rgba(239,68,68,.1);color:var(--red);}
+.btn-del:hover{background:rgba(239,68,68,.22);}
+.btn-view{background:rgba(16,185,129,.1);color:var(--green);}
+.btn-view:hover{background:rgba(16,185,129,.2);}
+.btn-resolve{background:rgba(245,158,11,.1);color:var(--yellow);}
+.btn-resolve:hover{background:rgba(245,158,11,.2);}
+.btn-primary{
+  padding:.5rem 1.125rem;background:var(--primary);
+  border-radius:var(--radius);color:#fff;
+  box-shadow:0 2px 12px rgba(99,102,241,.3);
+}
+.btn-primary:hover{background:var(--primary-dark);box-shadow:0 4px 16px rgba(99,102,241,.4);transform:translateY(-1px);}
+.btn-ghost{
+  padding:.4375rem .875rem;background:var(--surface2);
+  border:1px solid var(--border2);border-radius:var(--radius);color:var(--text2);
+}
+.btn-ghost:hover{background:var(--surface3);color:var(--text);}
+.btn-danger{padding:.5rem 1.125rem;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.2);border-radius:var(--radius);color:var(--red);}
+.btn-danger:hover{background:rgba(239,68,68,.2);}
+
+/* ══ MODAL ════════════════════════════════════════════════════ */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);
+  z-index:9000;display:none;align-items:center;justify-content:center;padding:1rem;
+}
+.overlay.open{display:flex;}
+.modal{
+  background:var(--surface);border:1px solid var(--border2);
+  border-radius:var(--radius-xl);width:100%;max-width:560px;
+  max-height:92vh;overflow-y:auto;box-shadow:var(--shadow-lg);
+  animation:modalIn .2s ease;
+}
+@keyframes modalIn{from{opacity:0;transform:translateY(-12px) scale(.97)}to{opacity:1;transform:none}}
+.modal-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.125rem 1.375rem;border-bottom:1px solid var(--border);
+  position:sticky;top:0;background:var(--surface);z-index:1;
+}
+.modal-hd h3{font-size:1rem;font-weight:700;letter-spacing:-.02em;}
+.modal-x{
+  width:28px;height:28px;background:var(--surface2);border:none;
+  border-radius:6px;color:var(--text3);cursor:pointer;
+  display:grid;place-items:center;transition:all .15s;
+  font-size:.9375rem;line-height:1;
+}
+.modal-x:hover{background:var(--surface3);color:var(--text);}
+.modal-body{padding:1.25rem 1.375rem;display:flex;flex-direction:column;gap:.875rem;}
+.modal-ft{
+  padding:.875rem 1.375rem;border-top:1px solid var(--border);
+  display:flex;justify-content:flex-end;gap:.625rem;
+  position:sticky;bottom:0;background:var(--surface);
+}
+.mfield{display:flex;flex-direction:column;gap:.375rem;}
+.mfield label{font-size:.625rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;}
+.mfield input,.mfield select,.mfield textarea{
+  padding:.5625rem .75rem;background:var(--surface2);border:1px solid var(--border2);
+  border-radius:8px;color:var(--text);font-family:var(--mono);font-size:.8125rem;
+  outline:none;transition:border-color .2s;
+}
+.mfield input:focus,.mfield select:focus,.mfield textarea:focus{border-color:var(--primary);}
+.mfield input::placeholder{color:var(--text3);}
+.mfield textarea{resize:vertical;min-height:72px;line-height:1.5;}
+.mfield select option{background:var(--surface2);}
+.mrow{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;}
+.mfield-note{font-size:.6875rem;color:var(--text3);margin-top:.25rem;}
+
+/* ══ SQL PANEL ════════════════════════════════════════════════ */
+.sql-wrap{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);overflow:hidden;}
+.sql-hd{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.875rem 1.125rem;border-bottom:1px solid var(--border);
+}
+.sql-hd h3{font-size:.9375rem;font-weight:700;}
+.sql-status{display:flex;align-items:center;gap:.375rem;font-size:.6875rem;font-family:var(--mono);color:var(--green);}
+.sql-dot{width:7px;height:7px;background:var(--green);border-radius:50%;box-shadow:0 0 6px var(--green);}
+.sql-body{padding:1.125rem;}
+.sql-ta{
+  width:100%;min-height:110px;padding:.875rem 1rem;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:var(--radius);color:#a5f3fc;font-family:var(--mono);
+  font-size:.8125rem;outline:none;resize:vertical;line-height:1.65;
+  transition:border-color .2s;tab-size:2;
+}
+.sql-ta:focus{border-color:var(--primary);}
+.sql-ta::placeholder{color:var(--text3);}
+.sql-actions{display:flex;gap:.625rem;flex-wrap:wrap;margin:1rem 0;}
+.sql-result{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:var(--radius);padding:.875rem 1rem;
+  font-family:var(--mono);font-size:.75rem;line-height:1.7;
+  max-height:380px;overflow:auto;white-space:pre;
+  color:var(--green);
+}
+.sql-result.error{color:var(--red);}
+.sql-result.empty{color:var(--text3);}
+.sql-presets{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:.75rem;margin-bottom:1.5rem;}
+.preset-card{
+  padding:.875rem 1rem;background:var(--surface2);border:1px solid var(--border2);
+  border-radius:var(--radius);cursor:pointer;transition:all .2s;
+}
+.preset-card:hover{border-color:var(--primary);background:var(--surface3);}
+.preset-card h4{font-size:.8125rem;font-weight:700;margin-bottom:.25rem;}
+.preset-card code{font-size:.6875rem;color:var(--cyan);font-family:var(--mono);opacity:.8;}
+
+/* ══ ACTIVITY FEED ═══════════════════════════════════════════ */
+.activity-list{display:flex;flex-direction:column;gap:0;}
+.activity-item{
+  display:flex;align-items:flex-start;gap:.75rem;
+  padding:.75rem 0;border-bottom:1px solid var(--border);
+}
+.activity-item:last-child{border-bottom:none;}
+.act-dot{
+  width:28px;height:28px;border-radius:8px;
+  display:grid;place-items:center;flex-shrink:0;font-size:.875rem;
+  margin-top:.125rem;
+}
+.act-text{font-size:.8125rem;color:var(--text2);line-height:1.4;flex:1;}
+.act-text strong{color:var(--text);font-weight:600;}
+.act-time{font-size:.6875rem;color:var(--text3);white-space:nowrap;font-family:var(--mono);}
+
+/* ══ GRID LAYOUT HELPERS ═════════════════════════════════════ */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem;}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.25rem;margin-bottom:1.25rem;}
+
+/* ══ INFO CARD ════════════════════════════════════════════════ */
+.info-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius-lg);padding:1.125rem 1.25rem;}
+.info-card h3{font-size:.9375rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+.info-card h3 svg{width:16px;height:16px;color:var(--primary);}
+
+/* ══ ALERT BOX ════════════════════════════════════════════════ */
+.alert{
+  padding:.75rem 1rem;border-radius:var(--radius);
+  font-size:.8125rem;font-weight:500;line-height:1.5;
+  display:flex;align-items:flex-start;gap:.625rem;
+  margin-bottom:1.25rem;
+}
+.alert svg{width:16px;height:16px;flex-shrink:0;margin-top:.125rem;}
+.alert-info{background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.2);color:var(--text2);}
+.alert-info svg{color:var(--primary);}
+.alert strong{color:var(--text);}
+.alert code{
+  font-family:var(--mono);font-size:.75rem;
+  background:rgba(99,102,241,.15);padding:.1em .4em;border-radius:4px;
+  color:var(--cyan);
+}
+
+/* ══ TOAST ════════════════════════════════════════════════════ */
+#toasts{position:fixed;top:1rem;right:1rem;display:flex;flex-direction:column;gap:.5rem;z-index:99999;pointer-events:none;}
+.toast{
+  display:flex;align-items:center;gap:.625rem;padding:.625rem 1rem;
+  border-radius:var(--radius);font-size:.8125rem;font-weight:600;
+  box-shadow:var(--shadow-lg);animation:toastIn .25s ease;max-width:340px;
+  pointer-events:all;
+}
+.toast-icon{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;flex-shrink:0;}
+.toast-icon svg{width:12px;height:12px;}
+.ts{background:#052e16;border:1px solid #14532d;color:#86efac;}
+.ts .toast-icon{background:rgba(16,185,129,.2);}
+.ts .toast-icon svg{color:var(--green);}
+.te{background:#450a0a;border:1px solid #7f1d1d;color:#fca5a5;}
+.te .toast-icon{background:rgba(239,68,68,.2);}
+.te .toast-icon svg{color:var(--red);}
+.ti{background:#0c1a2e;border:1px solid #1e3a5f;color:#93c5fd;}
+.ti .toast-icon{background:rgba(59,130,246,.2);}
+.ti .toast-icon svg{color:var(--blue);}
+.tw{background:#2d1800;border:1px solid #78350f;color:#fcd34d;}
+.tw .toast-icon{background:rgba(245,158,11,.2);}
+.tw .toast-icon svg{color:var(--yellow);}
+@keyframes toastIn{from{opacity:0;transform:translateX(24px)}to{opacity:1;transform:none}}
+
+/* ══ CONFIRM DIALOG ══════════════════════════════════════════ */
+.confirm-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);
+  z-index:99998;display:none;align-items:center;justify-content:center;padding:1rem;
+}
+.confirm-overlay.open{display:flex;}
+.confirm-box{
+  background:var(--surface);border:1px solid rgba(239,68,68,.3);
+  border-radius:var(--radius-xl);padding:1.75rem;width:100%;max-width:400px;
+  box-shadow:var(--shadow-lg);text-align:center;animation:modalIn .2s ease;
+}
+.confirm-icon{
+  width:52px;height:52px;border-radius:50%;background:rgba(239,68,68,.12);
+  border:2px solid rgba(239,68,68,.25);display:grid;place-items:center;
+  margin:0 auto 1rem;
+}
+.confirm-icon svg{width:24px;height:24px;color:var(--red);}
+.confirm-box h3{font-size:1.0625rem;font-weight:700;margin-bottom:.5rem;}
+.confirm-box p{font-size:.8125rem;color:var(--text2);line-height:1.5;margin-bottom:1.5rem;}
+.confirm-box p strong{color:var(--text);}
+.confirm-btns{display:flex;gap:.75rem;justify-content:center;}
+
+/* ══ QUICK CARDS (DASHBOARD) ═════════════════════════════════ */
+.quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin-bottom:1.5rem;}
+.quick-card{
+  padding:1rem;background:var(--surface);border:1px solid var(--border2);
+  border-radius:var(--radius-lg);cursor:pointer;transition:all .2s;
+  display:flex;align-items:center;gap:.875rem;
+}
+.quick-card:hover{border-color:var(--border3);transform:translateY(-2px);box-shadow:var(--shadow);}
+.qc-icon{
+  width:36px;height:36px;border-radius:10px;
+  display:grid;place-items:center;flex-shrink:0;font-size:1.125rem;
+}
+.qc-label{font-size:.8125rem;font-weight:700;}
+.qc-sub{font-size:.6875rem;color:var(--text3);}
+
+/* ══ SECTION DIVIDER ═════════════════════════════════════════ */
+.section-title{
+  font-size:.9375rem;font-weight:700;margin-bottom:1rem;
+  display:flex;align-items:center;gap:.5rem;
+}
+.section-title::after{
+  content:'';flex:1;height:1px;background:var(--border);margin-left:.5rem;
+}
+
+/* ══ TOP BAR ══════════════════════════════════════════════════ */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.75rem 1.75rem;background:rgba(14,17,23,.9);
+  border-bottom:1px solid var(--border);
+  backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;
+}
+.topbar-left{display:flex;align-items:center;gap:.5rem;}
+.topbar-page{font-size:.875rem;font-weight:700;letter-spacing:-.015em;color:var(--text);}
+.topbar-sep{color:var(--text4);font-size:.75rem;}
+.topbar-sub{font-size:.75rem;color:var(--text3);}
+.topbar-right{display:flex;align-items:center;gap:.625rem;}
+.topbar-clock{
+  font-family:var(--mono);font-size:.6875rem;color:var(--green);
+  padding:.3rem .75rem;background:rgba(16,185,129,.07);
+  border:1px solid rgba(16,185,129,.15);border-radius:99px;
+  letter-spacing:.03em;
+}
+.btn-refresh{
+  width:28px;height:28px;display:grid;place-items:center;
+  background:var(--surface2);border:1px solid var(--border2);
+  border-radius:8px;cursor:pointer;color:var(--text3);
+  transition:all .15s;
+}
+.btn-refresh:hover{background:var(--surface3);color:var(--text);}
+
+/* ══ SIDEBAR ENHANCEMENTS ════════════════════════════════════ */
+.sidebar{
+  background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+}
+.sidebar-header{padding:1.25rem 1rem 1rem;border-bottom:1px solid var(--border);}
+.sb-badge{
+  font-size:.5rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;
+  display:block;color:var(--text3);margin-top:.1rem;
+}
+.nav-btn.active{
+  background:linear-gradient(90deg,rgba(99,102,241,.14),rgba(99,102,241,.04));
+  color:var(--primary);
+  border-left:2px solid var(--primary);
+  padding-left:calc(.625rem - 2px);
+}
+.nav-btn.active .nb-icon{color:var(--primary);}
+.nav-btn.active .nb-count{background:rgba(99,102,241,.2);color:var(--primary);}
+
+/* ══ ENHANCED STAT CARDS ══════════════════════════════════════ */
+.stat-card:hover{
+  border-color:var(--border3);transform:translateY(-2px);
+  box-shadow:0 8px 32px rgba(0,0,0,.3);
+}
+
+/* ══ TABLE ENHANCEMENTS ═══════════════════════════════════════ */
+tr:hover td{background:rgba(255,255,255,.018);}
+.tcard-count{
+  font-size:.6875rem;color:var(--text3);font-family:var(--mono);
+  background:var(--surface2);border:1px solid var(--border);
+  padding:.2rem .5rem;border-radius:99px;
+}
+
+/* ══ LOADING ANIMATION ════════════════════════════════════════ */
+.loading-row td{
+  animation:shimmer 1.5s infinite;
+}
+@keyframes shimmer{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* ══ ACTIVITY FEED TOOLTIP ════════════════════════════════════ */
+.act-time[title]{cursor:help;}
+
+/* ══ MODAL IMPROVEMENTS ═══════════════════════════════════════ */
+.modal-hd h3{font-size:1.0625rem;font-weight:700;letter-spacing:-.02em;}
+
+/* ══ SPIN KEYFRAME ════════════════════════════════════════════ */
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+
+/* ══ RESPONSIVE ══════════════════════════════════════════════ */
+@media(max-width:960px){
+  .layout{grid-template-columns:1fr;}
+  .sidebar{display:none;}
+  .grid-2,.grid-3{grid-template-columns:1fr;}
+  .mrow{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- ══ LOGIN ════════════════════════════════════════════════════ -->
+<div id="loginScreen">
+  <div class="login-wrap">
+    <div class="login-brand">
+      <div class="login-brand-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>
+      </div>
+      <div>
+        <div class="login-brand-name">CU <span>HUB</span></div>
+        <div style="font-size:.625rem;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;font-weight:700;">Administrator Portal</div>
+      </div>
+    </div>
+    <div class="login-card">
+      <div class="login-label">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:11px;height:11px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Restricted Access
+      </div>
+      <h1 class="login-title">Admin Sign In</h1>
+      <p class="login-sub">This panel is restricted to authorised personnel only. All access is logged.</p>
+      <div class="field">
+        <label>Username</label>
+        <input type="text" id="loginUser" placeholder="admin" autocomplete="username" spellcheck="false">
+      </div>
+      <div class="field">
+        <label>Password</label>
+        <input type="password" id="loginPass" placeholder="••••••••••" autocomplete="current-password">
+      </div>
+      <div id="loginError" class="login-error"></div>
+      <button class="login-btn" id="loginBtn">
+        Access Admin Panel
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;display:inline;margin-left:.375rem;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+      <div class="login-hint">Set credentials via <code>node setup-admin.js</code> · All sessions expire after 4 hours.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ADMIN APP ═════════════════════════════════════════════════ -->
+<div id="adminApp">
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-brand">
+          <div class="sb-icon">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>
+          </div>
+          <div>
+            <div class="sb-name">CU Hub</div>
+            <span class="sb-badge">Admin Panel</span>
+          </div>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-group">
+          <div class="nav-section">Overview</div>
+          <button class="nav-btn active" onclick="showPage('dashboard')">
+            <svg class="nb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            Dashboard
+          </button>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-section">Manage Data</div>
+          <button class="nav-btn" onclick="showPage('users')">
+            <svg class="nb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Users
+            <span class="nb-count" id="cnt-users">—</span>
+          </button>
+          <button class="nav-btn" onclick="showPage('marketplace')">
+            <svg class="nb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Marketplace
+            <span class="nb-count" id="cnt-market">—</span>
+          </button>
+          <button class="nav-btn" onclick="showPage('notes')">
+            <svg class="nb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Notes & PYQs
+            <span class="nb-count" id="cnt-notes">—</span>
+          </button>
+          <button class="nav-btn" onclick="showPage('lostfound')">
+            <svg class="nb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Lost & Found
+            <span class="nb-count" id="cnt-lf">—</span>
+          </button>
+          <button class="nav-btn" onclick="showPage('events')">
+            <svg class="nb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Events
+            <span class="nb-count" id="cnt-events">—</span>
+          </button>
+          <button class="nav-btn" onclick="showPage('feedback')">
+            <svg class="nb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Feedback
+            <span class="nb-count" id="cnt-fb">—</span>
+          </button>
+        </div>
+
+        <div class="nav-group">
+          <div class="nav-section">Developer</div>
+          <button class="nav-btn" onclick="showPage('query')">
+            <svg class="nb-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            SQL Console
+          </button>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="dev-info">
+          <div class="dev-name">Yash Agarwal</div>
+          <div class="dev-role">Developer · CURAJ CSE</div>
+        </div>
+        <button class="logout-btn" onclick="doLogout()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+          Sign Out
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main">
+
+      <!-- TOP BAR -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <span class="topbar-page" id="topbarTitle">Dashboard</span>
+          <span class="topbar-sep">·</span>
+          <span class="topbar-sub">CURAJ Campus Hub</span>
+        </div>
+        <div class="topbar-right">
+          <span class="topbar-clock" id="topbarClock">—</span>
+          <button class="btn-refresh" onclick="refreshCurrentPage()" title="Refresh">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:13px;height:13px;"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- ── DASHBOARD ── -->
+      <div id="page-dashboard" class="page active">
+        <div class="page-hd">
+          <h1>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:24px;height:24px;color:var(--primary)"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            Dashboard
+          </h1>
+          <p>Live database overview — Central University of Rajasthan Campus Platform</p>
+        </div>
+
+        <div class="stats-grid" id="statsGrid">
+          <div class="stat-card" onclick="showPage('users')" style="color:var(--primary)">
+            <div class="sc-icon" style="background:rgba(99,102,241,.12)">👥</div>
+            <div class="sc-label">Students</div>
+            <div class="sc-value" id="sv-users" style="color:var(--primary)">—</div>
+            <div class="sc-sub">Registered accounts</div>
+          </div>
+          <div class="stat-card" onclick="showPage('marketplace')" style="color:var(--green)">
+            <div class="sc-icon" style="background:rgba(16,185,129,.12)">🛒</div>
+            <div class="sc-label">Marketplace</div>
+            <div class="sc-value" id="sv-market" style="color:var(--green)">—</div>
+            <div class="sc-sub" id="sv-market-sub">Active listings</div>
+          </div>
+          <div class="stat-card" onclick="showPage('notes')" style="color:var(--yellow)">
+            <div class="sc-icon" style="background:rgba(245,158,11,.12)">📚</div>
+            <div class="sc-label">Study Resources</div>
+            <div class="sc-value" id="sv-notes" style="color:var(--yellow)">—</div>
+            <div class="sc-sub" id="sv-notes-sub">Notes + PYQs</div>
+          </div>
+          <div class="stat-card" onclick="showPage('lostfound')" style="color:var(--pink)">
+            <div class="sc-icon" style="background:rgba(236,72,153,.12)">🔍</div>
+            <div class="sc-label">Lost & Found</div>
+            <div class="sc-value" id="sv-lf" style="color:var(--pink)">—</div>
+            <div class="sc-sub" id="sv-lf-sub">Open reports</div>
+          </div>
+          <div class="stat-card" onclick="showPage('events')" style="color:var(--purple)">
+            <div class="sc-icon" style="background:rgba(139,92,246,.12)">🗓️</div>
+            <div class="sc-label">Events</div>
+            <div class="sc-value" id="sv-events" style="color:var(--purple)">—</div>
+            <div class="sc-sub" id="sv-events-sub">Upcoming</div>
+          </div>
+          <div class="stat-card" style="color:var(--cyan)">
+            <div class="sc-icon" style="background:rgba(6,182,212,.12)">⬇️</div>
+            <div class="sc-label">Downloads</div>
+            <div class="sc-value" id="sv-dl" style="color:var(--cyan)">—</div>
+            <div class="sc-sub">Total notes accessed</div>
+          </div>
+          <div class="stat-card" style="color:var(--green)">
+            <div class="sc-icon" style="background:rgba(16,185,129,.12)">💰</div>
+            <div class="sc-label">Listings Value</div>
+            <div class="sc-value" id="sv-val" style="color:var(--green);font-size:1.25rem">—</div>
+            <div class="sc-sub">Active listings ₹</div>
+          </div>
+          <div class="stat-card" onclick="showPage('feedback')" style="color:var(--orange)">
+            <div class="sc-icon" style="background:rgba(249,115,22,.12)">💬</div>
+            <div class="sc-label">Feedback</div>
+            <div class="sc-value" id="sv-fb" style="color:var(--orange)">—</div>
+            <div class="sc-sub">Student submissions</div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="info-card">
+            <h3>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>
+              Quick Actions
+            </h3>
+            <div class="quick-grid" style="margin-bottom:0;">
+              <div class="quick-card" onclick="showPage('users')">
+                <div class="qc-icon" style="background:rgba(99,102,241,.1)">👥</div>
+                <div><div class="qc-label">Manage Users</div><div class="qc-sub">View &amp; edit students</div></div>
+              </div>
+              <div class="quick-card" onclick="openAddNote()">
+                <div class="qc-icon" style="background:rgba(245,158,11,.1)">📤</div>
+                <div><div class="qc-label">Upload Resource</div><div class="qc-sub">Add notes or PYQs</div></div>
+              </div>
+              <div class="quick-card" onclick="openAddEvent()">
+                <div class="qc-icon" style="background:rgba(139,92,246,.1)">🎉</div>
+                <div><div class="qc-label">Post Event</div><div class="qc-sub">Announce events</div></div>
+              </div>
+              <div class="quick-card" onclick="showPage('query')">
+                <div class="qc-icon" style="background:rgba(6,182,212,.1)">⚡</div>
+                <div><div class="qc-label">SQL Console</div><div class="qc-sub">Run raw queries</div></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <h3 style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;">
+              <span style="display:flex;align-items:center;gap:.5rem;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:16px;height:16px;color:var(--primary)"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Recent Activity
+              </span>
+              <button onclick="loadActivity()" style="padding:.25rem .625rem;background:var(--surface2);border:1px solid var(--border2);border-radius:6px;color:var(--text3);font-size:.6875rem;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:.3rem;transition:all .15s;" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--text3)'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:10px;height:10px;"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                Reload
+              </button>
+            </h3>
+            <div class="activity-list" id="activityFeed">
+              <div style="color:var(--text3);font-size:.8125rem;padding:.5rem 0;">Loading activity...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── USERS ── -->
+      <div id="page-users" class="page">
+        <div class="page-hd">
+          <div class="page-hd-row">
+            <div>
+              <h1>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:22px;height:22px;color:var(--primary)"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Students
+              </h1>
+              <p>All registered CURAJ students. Passwords and session tokens are never shown.</p>
+            </div>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-toolbar">
+            <span class="tcard-title">Users Table</span>
+            <span class="tcard-count" id="user-count-lbl"></span>
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input placeholder="Search name, enrollment, dept, program…" oninput="filterTable('usersTable',this.value)">
+            </div>
+          </div>
+          <div class="tcard-wrap">
+            <table id="usersTable">
+              <thead><tr>
+                <th>#</th>
+                <th>Student</th>
+                <th>Enrollment</th>
+                <th>Department</th>
+                <th>Program</th>
+                <th>Year / Sem</th>
+                <th>Phone</th>
+                <th>Bio</th>
+                <th>🛒 Market</th>
+                <th>📚 Notes</th>
+                <th>🔍 L&amp;F</th>
+                <th>🗓️ Events</th>
+                <th>⬇️ DLs</th>
+                <th>Last Login</th>
+                <th>Joined</th>
+                <th>Actions</th>
+              </tr></thead>
+              <tbody id="usersBody"><tr class="loading-row"><td colspan="16">Loading students…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── MARKETPLACE ── -->
+      <div id="page-marketplace" class="page">
+        <div class="page-hd">
+          <h1>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:22px;height:22px;color:var(--green)"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+            Marketplace
+          </h1>
+          <p>All student listings. Change status to <strong>removed</strong> to hide from public view.</p>
+          <div class="page-actions">
+            <button class="btn btn-primary" onclick="openAddMarket()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><path d="M12 5v14M5 12h14"/></svg>
+              Add Listing
+            </button>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-toolbar">
+            <span class="tcard-title">Marketplace Table</span>
+            <span class="tcard-count" id="mkt-count-lbl"></span>
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input placeholder="Search title, category, seller..." oninput="filterTable('marketTable',this.value)">
+            </div>
+          </div>
+          <div class="tcard-wrap">
+            <table id="marketTable">
+              <thead><tr><th>ID</th><th>Title</th><th>Price</th><th>Category</th><th>Condition</th><th>Seller</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="marketBody"><tr class="loading-row"><td colspan="9">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── NOTES ── -->
+      <div id="page-notes" class="page">
+        <div class="page-hd">
+          <h1>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:22px;height:22px;color:var(--yellow)"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+            Notes &amp; PYQs
+          </h1>
+          <p>All uploaded study material. Add official resources directly from here.</p>
+          <div class="page-actions">
+            <button class="btn btn-primary" onclick="openAddNote()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><path d="M12 5v14M5 12h14"/></svg>
+              Add Resource
+            </button>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-toolbar">
+            <span class="tcard-title">Notes Table</span>
+            <span class="tcard-count" id="notes-count-lbl"></span>
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input placeholder="Search title, subject, uploader..." oninput="filterTable('notesTable',this.value)">
+            </div>
+          </div>
+          <div class="tcard-wrap">
+            <table id="notesTable">
+              <thead><tr><th>ID</th><th>Title</th><th>Subject</th><th>Dept</th><th>Sem</th><th>Type</th><th>Uploader</th><th>Downloads</th><th>Link</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="notesBody"><tr class="loading-row"><td colspan="12">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── LOST & FOUND ── -->
+      <div id="page-lostfound" class="page">
+        <div class="page-hd">
+          <h1>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:22px;height:22px;color:var(--pink)"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            Lost &amp; Found
+          </h1>
+          <p>All reports. Mark as resolved once an item is claimed or returned.</p>
+        </div>
+        <div class="tcard">
+          <div class="tcard-toolbar">
+            <span class="tcard-title">Lost &amp; Found Table</span>
+            <span class="tcard-count" id="lf-count-lbl"></span>
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input placeholder="Search item, location, reporter..." oninput="filterTable('lfTable',this.value)">
+            </div>
+          </div>
+          <div class="tcard-wrap">
+            <table id="lfTable">
+              <thead><tr><th>ID</th><th>Item</th><th>Type</th><th>Location</th><th>Contact</th><th>Reporter</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="lfBody"><tr class="loading-row"><td colspan="9">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── EVENTS ── -->
+      <div id="page-events" class="page">
+        <div class="page-hd">
+          <h1>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:22px;height:22px;color:var(--purple)"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Events
+          </h1>
+          <p>Campus events. Post official university events directly from here.</p>
+          <div class="page-actions">
+            <button class="btn btn-primary" onclick="openAddEvent()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:14px;height:14px;"><path d="M12 5v14M5 12h14"/></svg>
+              Add Event
+            </button>
+          </div>
+        </div>
+        <div class="tcard">
+          <div class="tcard-toolbar">
+            <span class="tcard-title">Events Table</span>
+            <span class="tcard-count" id="ev-count-lbl"></span>
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input placeholder="Search title, category, organizer..." oninput="filterTable('eventsTable',this.value)">
+            </div>
+          </div>
+          <div class="tcard-wrap">
+            <table id="eventsTable">
+              <thead><tr><th>ID</th><th>Title</th><th>Category</th><th>Venue</th><th>Date &amp; Time</th><th>Organizer</th><th>Posted By</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="eventsBody"><tr class="loading-row"><td colspan="9">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── FEEDBACK ── -->
+      <div id="page-feedback" class="page">
+        <div class="page-hd">
+          <h1>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:22px;height:22px;color:var(--orange)"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Feedback
+          </h1>
+          <p>Student feedback and suggestions. Mark as resolved once addressed.</p>
+        </div>
+        <div class="tcard">
+          <div class="tcard-toolbar">
+            <span class="tcard-title">Feedback Table</span>
+            <span class="tcard-count" id="fb-count-lbl"></span>
+            <div class="search-box">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+              <input placeholder="Search feedback, student..." oninput="filterTable('fbTable',this.value)">
+            </div>
+          </div>
+          <div class="tcard-wrap">
+            <table id="fbTable">
+              <thead><tr><th>ID</th><th>Title</th><th>Message</th><th>Category</th><th>Rating</th><th>Student</th><th>Status</th><th>Date</th><th>Actions</th></tr></thead>
+              <tbody id="fbBody"><tr class="loading-row"><td colspan="9">Loading...</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── SQL CONSOLE ── -->
+      <div id="page-query" class="page">
+        <div class="page-hd">
+          <h1>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:22px;height:22px;color:var(--cyan)"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+            SQL Console
+          </h1>
+          <p>Run raw SQL on <code style="font-family:var(--mono);background:var(--surface2);padding:.1em .4em;border-radius:4px;font-size:.75rem">cuhub.db</code> — DROP, TRUNCATE, ALTER, ATTACH are blocked.</p>
+        </div>
+
+        <div class="alert alert-info">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          <div>
+            <strong>Available tables:</strong> <code>users</code> <code>marketplace</code> <code>notes</code> <code>lost_found</code> <code>events</code> <code>feedback</code><br>
+            <strong>SELECT, UPDATE, DELETE, INSERT</strong> are all supported. Dangerous DDL commands are blocked server-side.
+          </div>
+        </div>
+
+        <div class="section-title">Quick Queries</div>
+        <div class="sql-presets">
+          <div class="preset-card" onclick="setSql('SELECT id, name, enrollment, department, year FROM users ORDER BY created_at DESC LIMIT 20')">
+            <h4>👥 Recent Users</h4>
+            <code>SELECT users ORDER BY joined</code>
+          </div>
+          <div class="preset-card" onclick="setSql(`SELECT * FROM marketplace WHERE status='active' ORDER BY created_at DESC`)">
+            <h4>🛒 Active Listings</h4>
+            <code>marketplace WHERE active</code>
+          </div>
+          <div class="preset-card" onclick="setSql('SELECT n.title, n.subject, n.semester, n.downloads, u.name FROM notes n LEFT JOIN users u ON n.user_id=u.id ORDER BY n.downloads DESC LIMIT 10')">
+            <h4>📚 Top Downloads</h4>
+            <code>notes ORDER BY downloads</code>
+          </div>
+          <div class="preset-card" onclick="setSql(`SELECT * FROM lost_found WHERE status='open' ORDER BY created_at DESC`)">
+            <h4>🔍 Open L&amp;F</h4>
+            <code>lost_found WHERE open</code>
+          </div>
+          <div class="preset-card" onclick="setSql(`SELECT * FROM events WHERE event_date >= date('now') ORDER BY event_date ASC`)">
+            <h4>🗓️ Upcoming Events</h4>
+            <code>events WHERE future</code>
+          </div>
+          <div class="preset-card" onclick="setSql('SELECT u.name, u.enrollment, COUNT(m.id) as listings, COUNT(n.id) as notes FROM users u LEFT JOIN marketplace m ON u.id=m.user_id LEFT JOIN notes n ON u.id=n.user_id GROUP BY u.id ORDER BY listings DESC')">
+            <h4>📊 User Activity</h4>
+            <code>JOIN users+marketplace+notes</code>
+          </div>
+        </div>
+
+        <div class="sql-wrap">
+          <div class="sql-hd">
+            <h3>SQL Console</h3>
+            <div class="sql-status">
+              <div class="sql-dot"></div>
+              Connected · cuhub.db
+            </div>
+          </div>
+          <div class="sql-body">
+            <textarea class="sql-ta" id="sqlInput" placeholder="SELECT * FROM users LIMIT 10;&#10;-- Write your SQL here. Tab = 2 spaces.&#10;-- Ctrl+Enter to run."></textarea>
+            <div class="sql-actions">
+              <button class="btn btn-primary" onclick="runQuery()">
+                <svg viewBox="0 0 24 24" fill="currentColor" style="width:13px;height:13px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                Run Query
+              </button>
+              <button class="btn btn-ghost" onclick="document.getElementById('sqlInput').value=''">Clear</button>
+              <button class="btn btn-ghost" onclick="setSql(`SELECT name, sql FROM sqlite_master WHERE type='table'`)">Show Tables</button>
+            </div>
+            <div class="sql-result empty" id="queryResult">Results will appear here…</div>
+          </div>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ══ EDIT MODAL ════════════════════════════════════════════════ -->
+<div class="overlay" id="editModal">
+  <div class="modal">
+    <div class="modal-hd">
+      <h3 id="modalTitle">Edit Record</h3>
+      <button class="modal-x" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-ft">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancel</button>
+      <button class="btn btn-primary" id="modalSave">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONFIRM DIALOG ════════════════════════════════════════════ -->
+<div class="confirm-overlay" id="confirmDialog">
+  <div class="confirm-box">
+    <div class="confirm-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <h3 id="confirmTitle">Delete Record?</h3>
+    <p id="confirmMsg">This action cannot be undone.</p>
+    <div class="confirm-btns">
+      <button class="btn btn-ghost" onclick="closeConfirm()">Cancel</button>
+      <button class="btn btn-danger" id="confirmOkBtn">Delete</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ TOASTS ════════════════════════════════════════════════════ -->
+<div id="toasts"></div>
+
+<script>
+// ─── TOKEN & API ─────────────────────────────────────────────────────────────
+let TOKEN = '';
+const API = async (path, opts = {}) => {
+  const res = await fetch('/admin/api' + path, {
+    ...opts,
+    headers: {
+      'Content-Type': 'application/json',
+      'x-admin-token': TOKEN,
+      ...(opts.headers || {})
+    },
+    body: opts.body !== undefined ? JSON.stringify(opts.body) : undefined
+  });
+  const data = await res.json();
+  if (!res.ok) throw new Error(data.error || 'Request failed');
+  return data;
+};
+
+// ─── LOGIN ────────────────────────────────────────────────────────────────────
+async function doLogin() {
+  const user = document.getElementById('loginUser').value.trim();
+  const pass = document.getElementById('loginPass').value;
+  const btn  = document.getElementById('loginBtn');
+  const err  = document.getElementById('loginError');
+  if (!user || !pass) { err.textContent = 'Enter username and password.'; err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Authenticating…';
+  try {
+    const d = await fetch('/admin/api/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: user, password: pass })
+    }).then(r => r.json());
+    if (d.error) throw new Error(d.error);
+    TOKEN = d.token;
+    sessionStorage.setItem('cuAdminToken', TOKEN);
+    showAdminApp();
+  } catch(e) {
+    err.textContent = e.message;
+    err.style.display = 'block';
+    document.getElementById('loginPass').value = '';
+  } finally {
+    btn.disabled = false; btn.innerHTML = 'Access Admin Panel <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width:16px;height:16px;display:inline;margin-left:.375rem;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>';
+  }
+}
+
+function showAdminApp() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('adminApp').style.display = 'block';
+  toast('Welcome, Admin! 👋', 'success');
+  loadStats();
+  loadActivity();
+  _startClock();
+}
+
+function _startClock() {
+  const el = document.getElementById('topbarClock');
+  if (!el) return;
+  const tick = () => {
+    const now = new Date();
+    const h = now.getHours().toString().padStart(2,'0');
+    const m = now.getMinutes().toString().padStart(2,'0');
+    const s = now.getSeconds().toString().padStart(2,'0');
+    el.textContent = h + ':' + m + ':' + s + ' IST';
+  };
+  tick();
+  setInterval(tick, 1000);
+}
+
+async function doLogout() {
+  if (TOKEN) {
+    try { await fetch('/admin/api/logout', { method: 'POST', headers: { 'x-admin-token': TOKEN, 'Content-Type': 'application/json' } }); } catch(e) {}
+  }
+  TOKEN = '';
+  sessionStorage.removeItem('cuAdminToken');
+  document.getElementById('adminApp').style.display = 'none';
+  document.getElementById('loginScreen').style.display = 'flex';
+}
+
+// Auto-restore from sessionStorage (tab-scoped, cleared on close)
+window.addEventListener('DOMContentLoaded', () => {
+  // Block devtools key sniffing
+  document.addEventListener('keydown', e => {
+    if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && ['I','J','C','U'].includes(e.key))) e.preventDefault();
+  });
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  const saved = sessionStorage.getItem('cuAdminToken');
+  if (saved) {
+    TOKEN = saved;
+    fetch('/admin/api/stats', { headers: { 'x-admin-token': TOKEN } })
+      .then(r => r.ok ? showAdminApp() : (TOKEN = '', sessionStorage.removeItem('cuAdminToken')))
+      .catch(() => { TOKEN = ''; sessionStorage.removeItem('cuAdminToken'); });
+  }
+  document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+  document.getElementById('loginUser').addEventListener('keydown', e => { if (e.key === 'Enter') document.getElementById('loginPass').focus(); });
+  // SQL Ctrl+Enter
+  document.getElementById('sqlInput').addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') { e.preventDefault(); runQuery(); }
+  });
+});
+
+// ─── NAVIGATION ──────────────────────────────────────────────────────────────
+const _PAGE_TITLES = {
+  dashboard:'Dashboard', users:'Students', marketplace:'Marketplace',
+  notes:'Notes & PYQs', lostfound:'Lost & Found',
+  events:'Events', feedback:'Feedback', query:'SQL Console'
+};
+
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  const pg = document.getElementById('page-' + name);
+  if (pg) pg.classList.add('active');
+  const btn = [...document.querySelectorAll('.nav-btn')].find(b => b.getAttribute('onclick')?.includes("'" + name + "'"));
+  if (btn) btn.classList.add('active');
+  const titleEl = document.getElementById('topbarTitle');
+  if (titleEl) titleEl.textContent = _PAGE_TITLES[name] || name;
+  const loaders = { users: loadUsers, marketplace: loadMarket, notes: loadNotes, lostfound: loadLF, events: loadEvents, feedback: loadFeedback };
+  if (loaders[name]) loaders[name]();
+  if (name === 'dashboard') { loadStats(); loadActivity(); }
+}
+
+function refreshCurrentPage() {
+  const active = document.querySelector('.page.active');
+  if (!active) return;
+  showPage(active.id.replace('page-', ''));
+}
+
+// ─── STATS ────────────────────────────────────────────────────────────────────
+async function loadStats() {
+  try {
+    const s = await API('/stats');
+    set('sv-users',  s.users);
+    set('sv-market', s.marketplace_active);
+    set('sv-market-sub', `${s.marketplace_active} active of ${s.marketplace} total`);
+    set('sv-notes',  s.notes);
+    set('sv-notes-sub', `${s.notes_pyq} PYQs + ${s.notes - s.notes_pyq} notes`);
+    set('sv-lf',     s.lost_found_open);
+    set('sv-lf-sub', `${s.lost_found_open} open of ${s.lost_found} total`);
+    set('sv-events', s.events_upcoming);
+    set('sv-events-sub', `${s.events_upcoming} upcoming of ${s.events} total`);
+    set('sv-dl',     s.total_downloads);
+    set('sv-val',    '₹' + Number(s.marketplace_value || 0).toLocaleString('en-IN'));
+    set('sv-fb',     s.feedback);
+    set('cnt-users',  s.users);
+    set('cnt-market', s.marketplace_active);
+    set('cnt-notes',  s.notes);
+    set('cnt-lf',     s.lost_found_open);
+    set('cnt-events', s.events_upcoming);
+    set('cnt-fb',     s.feedback);
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+async function loadActivity() {
+  try {
+    const items = await API('/activity');
+    const icons = { user:'👤', notes:'📚', market:'🛒', event:'🗓️' };
+    const colors = {
+      user: 'rgba(99,102,241,.12)', notes: 'rgba(245,158,11,.12)',
+      market: 'rgba(16,185,129,.12)', event: 'rgba(139,92,246,.12)'
+    };
+    const feed = document.getElementById('activityFeed');
+    if (!items.length) { feed.innerHTML = '<div style="color:var(--text3);font-size:.8125rem;padding:.5rem 0;">No activity yet.</div>'; return; }
+    feed.innerHTML = items.map(a => `
+      <div class="activity-item">
+        <div class="act-dot" style="background:${colors[a.type]||'rgba(100,116,139,.1)'}">${icons[a.type]||'📌'}</div>
+        <div class="act-text">${esc(a.text)}</div>
+        <div class="act-time" title="${new Date(_parseTS(a.time)||0).toLocaleString('en-IN')}">${timeAgo(a.time)}</div>
+      </div>`).join('');
+  } catch(e) {}
+}
+
+// ─── USERS ────────────────────────────────────────────────────────────────────
+async function loadUsers() {
+  const tbody = document.getElementById('usersBody');
+  tbody.innerHTML = '<tr class="loading-row"><td colspan="16">Loading students…</td></tr>';
+  try {
+    const rows = await API('/users');
+    set('user-count-lbl', rows.length + ' students');
+
+    tbody.innerHTML = rows.length ? rows.map(u => {
+      const initials = (u.name||'?').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+      const deptShort = (u.department||'').split(' ').slice(0,3).join(' ') || '—';
+      return `
+      <tr>
+        <td class="cmono" style="color:var(--text4);font-size:.6rem">${u.id}</td>
+
+        <td style="min-width:150px">
+          <div style="display:flex;align-items:center;gap:.5rem">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#7c3aed);display:grid;place-items:center;font-size:.5625rem;font-weight:800;color:#fff;flex-shrink:0">${esc(initials)}</div>
+            <div>
+              <div class="cm" style="font-size:.8rem;white-space:nowrap">${esc(u.name)}</div>
+              ${u.bio ? `<div style="font-size:.6rem;color:var(--text3);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(u.bio)}">${esc(u.bio)}</div>` : ''}
+            </div>
+          </div>
+        </td>
+
+        <td class="cmono" style="font-size:.6875rem;color:var(--cyan)">${esc(u.enrollment||'—')}</td>
+
+        <td style="max-width:140px">
+          <span class="badge bb ctrunc" title="${esc(u.department||'')}" style="max-width:130px;display:inline-block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;vertical-align:middle">${esc(deptShort)}</span>
+        </td>
+
+        <td style="font-size:.6875rem;color:var(--text2);white-space:nowrap">${esc(u.program||'—')}</td>
+
+        <td class="cmono" style="font-size:.6875rem;white-space:nowrap">
+          ${u.year   ? `<span style="color:var(--text2)">Yr ${esc(String(u.year))}</span>` : ''}
+          ${u.year && u.semester ? '<span style="color:var(--text4)"> / </span>' : ''}
+          ${u.semester ? `<span style="color:var(--text3)">Sem ${esc(String(u.semester))}</span>` : ''}
+          ${!u.year && !u.semester ? '<span style="color:var(--text4)">—</span>' : ''}
+        </td>
+
+        <td class="cmono" style="font-size:.6875rem;color:var(--text2)">${esc(u.phone||u.contact||'—')}</td>
+
+        <td style="max-width:120px">
+          ${u.bio ? `<span class="ctrunc" style="font-size:.6rem;color:var(--text3);display:block;max-width:115px" title="${esc(u.bio)}">${esc(u.bio)}</span>` : '<span style="color:var(--text4);font-size:.6rem">—</span>'}
+        </td>
+
+        <!-- Activity counts -->
+        <td class="cmono" style="text-align:center;font-size:.75rem">
+          <span style="color:${(u.listings||0)>0?'var(--green)':'var(--text4)'};font-weight:${(u.listings||0)>0?700:400}">${u.listings||0}</span>
+          ${(u.active_listings||0) < (u.listings||0) ? `<span style="font-size:.55rem;color:var(--text3)"> (${u.active_listings}✓)</span>` : ''}
+        </td>
+
+        <td class="cmono" style="text-align:center;font-size:.75rem">
+          <span style="color:${(u.uploads||0)>0?'var(--yellow)':'var(--text4)'};font-weight:${(u.uploads||0)>0?700:400}">${u.uploads||0}</span>
+          ${(u.total_downloads||0)>0 ? `<br><span style="font-size:.55rem;color:var(--cyan)">↓${u.total_downloads}</span>` : ''}
+        </td>
+
+        <td class="cmono" style="text-align:center;font-size:.75rem;color:${(u.lost_found_posts||0)>0?'var(--pink)':'var(--text4)'}">${u.lost_found_posts||0}</td>
+        <td class="cmono" style="text-align:center;font-size:.75rem;color:${(u.events_posted||0)>0?'var(--purple)':'var(--text4)'}">${u.events_posted||0}</td>
+        <td class="cmono" style="text-align:center;font-size:.75rem;color:${(u.total_downloads||0)>0?'var(--cyan)':'var(--text4)'}">${u.total_downloads||0}</td>
+
+        <td style="font-size:.6875rem;white-space:nowrap" title="${u.last_login_at ? fmtDate(u.last_login_at) : 'Never logged in'}">
+          ${u.last_login_at
+            ? `<span style="color:var(--green)">${timeAgo(u.last_login_at)}</span>`
+            : `<span style="color:var(--text4);font-style:italic">Never</span>`}
+        </td>
+
+        <td style="color:var(--text3);font-size:.6875rem;white-space:nowrap" title="${fmtDate(u.created_at)}">${fmtDate(u.created_at)}</td>
+
+        <td><div class="actions">
+          <button class="btn btn-view" onclick='viewUser(${jsonAttr(u)})' title="Full profile">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            View
+          </button>
+          <button class="btn btn-edit" onclick='editUser(${jsonAttr(u)})'>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit
+          </button>
+          <button class="btn btn-del" onclick="askDelete('users',${u.id},'${esc(u.name)}')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/></svg>
+            Del
+          </button>
+        </div></td>
+      </tr>`;
+    }).join('') : '<tr class="empty-row"><td colspan="16">No students registered yet.</td></tr>';
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+// Full-profile view modal
+function viewUser(u) {
+  const initials = (u.name||'?').split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase();
+  const totalActivity = (u.listings||0)+(u.uploads||0)+(u.lost_found_posts||0)+(u.events_posted||0)+(u.feedback_count||0);
+  modal('Student Profile', `
+    <div style="display:flex;align-items:center;gap:1rem;padding:.75rem 0 1.25rem;border-bottom:1px solid var(--border);margin-bottom:1.25rem">
+      <div style="width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,var(--primary),#7c3aed);display:grid;place-items:center;font-size:1.125rem;font-weight:800;color:#fff;flex-shrink:0">${esc(initials)}</div>
+      <div>
+        <div style="font-size:1.125rem;font-weight:800;letter-spacing:-.02em">${esc(u.name)}</div>
+        <div style="font-family:var(--mono);font-size:.75rem;color:var(--cyan);margin-top:.2rem">${esc(u.enrollment||'—')}</div>
+        ${u.bio ? `<div style="font-size:.75rem;color:var(--text2);margin-top:.375rem;line-height:1.4">${esc(u.bio)}</div>` : ''}
+      </div>
+      <div style="margin-left:auto;text-align:right">
+        <div style="font-size:1.5rem;font-weight:800;font-family:var(--mono);color:var(--primary)">${totalActivity}</div>
+        <div style="font-size:.625rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em">Total Posts</div>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.25rem">
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem">
+        <div style="font-size:.5625rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.75rem">Academic Details</div>
+        ${row2('Department', u.department||'—')}
+        ${row2('Program', u.program||'—')}
+        ${row2('Year', u.year||'—')}
+        ${row2('Semester', u.semester||'—')}
+      </div>
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem">
+        <div style="font-size:.5625rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.75rem">Contact & Account</div>
+        ${row2('Phone', u.phone||u.contact||'—')}
+        ${row2('User ID', '#' + u.id)}
+        ${row2('Joined', fmtDate(u.created_at))}
+        ${row2('Last Login', u.last_login_at ? fmtDate(u.last_login_at) : 'Never')}
+      </div>
+    </div>
+
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius);padding:.875rem;margin-bottom:1rem">
+      <div style="font-size:.5625rem;font-weight:800;color:var(--text3);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.875rem">Activity Breakdown</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:.625rem;text-align:center">
+        ${actCell('🛒', u.listings||0, 'Listings', 'var(--green)')}
+        ${actCell('📚', u.uploads||0, 'Notes', 'var(--yellow)')}
+        ${actCell('🔍', u.lost_found_posts||0, 'L&F Posts', 'var(--pink)')}
+        ${actCell('🗓️', u.events_posted||0, 'Events', 'var(--purple)')}
+        ${actCell('⬇️', u.total_downloads||0, 'DL Earned', 'var(--cyan)')}
+      </div>
+    </div>
+
+    <div style="display:flex;gap:.625rem;justify-content:flex-end;padding-top:.5rem">
+      <button class="btn btn-edit" onclick="closeModal();editUser(${jsonAttr(u)})" style="padding:.45rem .875rem;font-size:.75rem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Edit Profile
+      </button>
+    </div>
+  `, null);
+  // Hide save button in view-only modal
+  document.getElementById('modalSave').style.display = 'none';
+}
+
+function row2(label, value) {
+  return `<div style="display:flex;justify-content:space-between;align-items:baseline;padding:.25rem 0;border-bottom:1px solid rgba(255,255,255,.04)">
+    <span style="font-size:.6875rem;color:var(--text3)">${label}</span>
+    <span style="font-size:.75rem;color:var(--text);font-weight:600;text-align:right;max-width:55%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(String(value))}">${esc(String(value))}</span>
+  </div>`;
+}
+
+function actCell(emoji, count, label, color) {
+  return `<div style="background:var(--surface3);border-radius:8px;padding:.625rem .375rem">
+    <div style="font-size:1.25rem;margin-bottom:.25rem">${emoji}</div>
+    <div style="font-size:1.125rem;font-weight:800;font-family:var(--mono);color:${count>0?color:'var(--text4)'}">${count}</div>
+    <div style="font-size:.55rem;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-top:.2rem">${label}</div>
+  </div>`;
+}
+
+function editUser(u) {
+  document.getElementById('modalSave').style.display = '';
+  modal('Edit Student', `
+    <div class="mrow">
+      <div class="mfield"><label>Full Name</label><input id="fu_name" value="${esc(u.name)}"></div>
+      <div class="mfield"><label>Enrollment No.</label><input id="fu_enroll" value="${esc(u.enrollment||'')}" placeholder="2024BTCSE020"></div>
+    </div>
+    <div class="mfield"><label>Department</label><input id="fu_dept" value="${esc(u.department||'')}" placeholder="Computer Science and Engineering"></div>
+    <div class="mrow">
+      <div class="mfield"><label>Program</label><input id="fu_prog" value="${esc(u.program||'')}" placeholder="B.Tech / M.Sc / PhD…"></div>
+      <div class="mfield"><label>Year</label><input id="fu_year" value="${esc(u.year||'')}" placeholder="1 / 2 / 3 / 4"></div>
+    </div>
+    <div class="mrow">
+      <div class="mfield"><label>Semester</label><input id="fu_sem" value="${esc(u.semester||'')}" placeholder="1–8"></div>
+      <div class="mfield"><label>Phone</label><input id="fu_phone" value="${esc(u.phone||u.contact||'')}"></div>
+    </div>
+    <div class="mfield"><label>Bio</label><textarea id="fu_bio" style="min-height:56px">${esc(u.bio||'')}</textarea></div>
+  `, async () => {
+    await API('/users/' + u.id, { method: 'PATCH', body: {
+      name: val('fu_name'), enrollment: val('fu_enroll'),
+      department: val('fu_dept'), program: val('fu_prog'),
+      year: val('fu_year'), semester: val('fu_sem'),
+      phone: val('fu_phone'), bio: val('fu_bio')
+    }});
+    loadUsers(); loadStats();
+  });
+}
+
+// ─── MARKETPLACE ─────────────────────────────────────────────────────────────
+async function loadMarket() {
+  const tbody = document.getElementById('marketBody');
+  tbody.innerHTML = '<tr class="loading-row"><td colspan="9">Loading...</td></tr>';
+  try {
+    const rows = await API('/marketplace');
+    set('mkt-count-lbl', rows.length + ' listings');
+    const catCls = {books:'bb',electronics:'bp',stationery:'by',furniture:'bg',sports:'bc',other:'bgr'};
+    tbody.innerHTML = rows.length ? rows.map(m => `
+      <tr>
+        <td class="cmono" style="color:var(--text3)">#${m.id}</td>
+        <td><span class="cm ctrunc" title="${esc(m.title)}">${esc(m.title)}</span></td>
+        <td style="color:var(--green);font-family:var(--mono);font-weight:700">₹${Number(m.price).toLocaleString('en-IN')}</td>
+        <td><span class="badge ${catCls[m.category]||'bgr'}">${m.category}</span></td>
+        <td style="color:var(--text2)">${m.condition}</td>
+        <td><span class="cm">${esc(m.seller_name||'—')}</span><br><span class="cmono" style="color:var(--text3)">${esc(m.enrollment||'')}</span></td>
+        <td><span class="badge ${m.status==='active'?'bg':m.status==='sold'?'bgr':'br'}">${m.status}</span></td>
+        <td style="color:var(--text3);font-size:.6875rem" title="${fmtDate(m.created_at)}">${timeAgo(m.created_at)}</td>
+        <td><div class="actions">
+          <button class="btn btn-edit" onclick='editMarket(${jsonAttr(m)})'>Edit</button>
+          <button class="btn btn-del" onclick="askDelete('marketplace',${m.id},'${esc(m.title)}')">Delete</button>
+        </div></td>
+      </tr>`).join('') : '<tr class="empty-row"><td colspan="9">No listings yet.</td></tr>';
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function editMarket(m) {
+  modal('Edit Listing', `
+    <div class="mfield"><label>Title</label><input id="fm_title" value="${esc(m.title)}"></div>
+    <div class="mfield"><label>Description</label><textarea id="fm_desc">${esc(m.description||'')}</textarea></div>
+    <div class="mrow">
+      <div class="mfield"><label>Price (₹)</label><input id="fm_price" type="number" value="${m.price}"></div>
+      <div class="mfield"><label>Category</label>
+        <select id="fm_cat">${opts(['books','electronics','stationery','furniture','sports','clothing','other'],m.category)}</select>
+      </div>
+    </div>
+    <div class="mrow">
+      <div class="mfield"><label>Condition</label>
+        <select id="fm_cond">${opts(['like-new','good','fair','poor'],m.condition)}</select>
+      </div>
+      <div class="mfield"><label>Status</label>
+        <select id="fm_status">${opts(['active','sold','removed'],m.status)}</select>
+      </div>
+    </div>
+    <div class="mfield"><label>Contact</label><input id="fm_contact" value="${esc(m.contact||'')}"></div>
+  `, async () => {
+    await API('/marketplace/' + m.id, { method: 'PATCH', body: {
+      title: val('fm_title'), description: val('fm_desc'),
+      price: val('fm_price'), category: val('fm_cat'),
+      condition: val('fm_cond'), status: val('fm_status'), contact: val('fm_contact')
+    }});
+    loadMarket(); loadStats();
+  });
+}
+
+function openAddMarket() {
+  modal('Add Listing', `
+    <div class="mfield"><label>Title *</label><input id="fm_title" placeholder="e.g. NCERT Physics Class 12"></div>
+    <div class="mfield"><label>Description *</label><textarea id="fm_desc" placeholder="Condition, usage, etc."></textarea></div>
+    <div class="mrow">
+      <div class="mfield"><label>Price (₹) *</label><input id="fm_price" type="number" placeholder="0 = Free"></div>
+      <div class="mfield"><label>Category</label>
+        <select id="fm_cat">${opts(['books','electronics','stationery','furniture','sports','clothing','other'])}</select>
+      </div>
+    </div>
+    <div class="mrow">
+      <div class="mfield"><label>Condition</label>
+        <select id="fm_cond">${opts(['like-new','good','fair','poor'])}</select>
+      </div>
+      <div class="mfield"><label>Contact</label><input id="fm_contact" placeholder="10-digit phone"></div>
+    </div>
+    <div class="mfield"><label>User ID (owner)</label><input id="fm_uid" type="number" value="1">
+      <div class="mfield-note">Set to 1 for admin-posted items</div>
+    </div>
+  `, async () => {
+    if (!val('fm_title') || !val('fm_price')) throw new Error('Title and Price are required.');
+    await API('/marketplace', { method: 'POST', body: {
+      user_id: val('fm_uid') || '1', title: val('fm_title'), description: val('fm_desc'),
+      price: val('fm_price'), category: val('fm_cat'),
+      condition: val('fm_cond'), contact: val('fm_contact'), status: 'active'
+    }});
+    loadMarket(); loadStats();
+  });
+}
+
+// ─── NOTES ────────────────────────────────────────────────────────────────────
+async function loadNotes() {
+  const tbody = document.getElementById('notesBody');
+  tbody.innerHTML = '<tr class="loading-row"><td colspan="12">Loading...</td></tr>';
+  try {
+    const rows = await API('/notes');
+    set('notes-count-lbl', rows.length + ' resources');
+    tbody.innerHTML = rows.length ? rows.map(n => `
+      <tr>
+        <td class="cmono" style="color:var(--text3)">#${n.id}</td>
+        <td><span class="cm ctrunc" title="${esc(n.title)}">${esc(n.title)}</span></td>
+        <td style="color:var(--text2)">${esc(n.subject)}</td>
+        <td><span class="badge bb">${esc((n.department||'—').split(' ').slice(0,1).join(' '))}</span></td>
+        <td class="cmono">Sem ${n.semester}</td>
+        <td><span class="badge ${n.type==='pyq'?'bp':'by'}">${n.type}</span></td>
+        <td>${esc(n.uploader_name||'—')}</td>
+        <td class="cmono" style="color:var(--cyan)">${n.downloads}</td>
+        <td>${n.drive_link?`<a href="${esc(n.drive_link)}" target="_blank" rel="noopener" style="color:var(--primary);font-size:.6875rem">Open ↗</a>`:'—'}</td>
+        <td><span class="badge ${n.status==='approved'?'bg':'br'}">${n.status||'approved'}</span></td>
+        <td style="color:var(--text3);font-size:.6875rem">${fmtDate(n.created_at)}</td>
+        <td><div class="actions">
+          <button class="btn btn-edit" onclick='editNote(${jsonAttr(n)})'>Edit</button>
+          <button class="btn btn-del" onclick="askDelete('notes',${n.id},'${esc(n.title)}')">Delete</button>
+        </div></td>
+      </tr>`).join('') : '<tr class="empty-row"><td colspan="12">No resources yet.</td></tr>';
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function editNote(n) {
+  modal('Edit Resource', `
+    <div class="mfield"><label>Title</label><input id="fn_title" value="${esc(n.title)}"></div>
+    <div class="mfield"><label>Description</label><input id="fn_desc" value="${esc(n.description||'')}"></div>
+    <div class="mrow">
+      <div class="mfield"><label>Subject</label><input id="fn_subj" value="${esc(n.subject)}"></div>
+      <div class="mfield"><label>Semester</label>
+        <select id="fn_sem">${[1,2,3,4,5,6,7,8,9,10].map(s=>`<option value="${s}" ${String(s)===String(n.semester)?'selected':''}>${s}</option>`).join('')}</select>
+      </div>
+    </div>
+    <div class="mrow">
+      <div class="mfield"><label>Type</label>
+        <select id="fn_type">${opts(['notes','pyq'],n.type)}</select>
+      </div>
+      <div class="mfield"><label>Status</label>
+        <select id="fn_status">${opts(['approved','pending','rejected'],n.status||'approved')}</select>
+      </div>
+    </div>
+    <div class="mfield"><label>Department</label><input id="fn_dept" value="${esc(n.department||'')}"></div>
+    <div class="mfield"><label>Google Drive Link</label><input id="fn_drive" value="${esc(n.drive_link||'')}" placeholder="https://drive.google.com/…"></div>
+  `, async () => {
+    await API('/notes/' + n.id, { method: 'PATCH', body: {
+      title: val('fn_title'), description: val('fn_desc'),
+      subject: val('fn_subj'), semester: val('fn_sem'),
+      type: val('fn_type'), status: val('fn_status'),
+      department: val('fn_dept'), drive_link: val('fn_drive')
+    }});
+    loadNotes();
+  });
+}
+
+function openAddNote() {
+  modal('Add Study Resource', `
+    <div class="mfield"><label>Title *</label><input id="fn_title" placeholder="e.g. TOC PYQs Sem 5 2024"></div>
+    <div class="mfield"><label>Description</label><input id="fn_desc" placeholder="Brief info about the resource"></div>
+    <div class="mrow">
+      <div class="mfield"><label>Subject *</label><input id="fn_subj" placeholder="e.g. DBMS"></div>
+      <div class="mfield"><label>Semester</label>
+        <select id="fn_sem">${[1,2,3,4,5,6,7,8].map(s=>`<option value="${s}">${s}</option>`).join('')}</select>
+      </div>
+    </div>
+    <div class="mrow">
+      <div class="mfield"><label>Type</label>
+        <select id="fn_type">${opts(['notes','pyq'])}</select>
+      </div>
+      <div class="mfield"><label>Exam Type (PYQ only)</label>
+        <select id="fn_exam">${opts(['','CIA_I','CIA_II','END_SEM'])}</select>
+      </div>
+    </div>
+    <div class="mfield"><label>Department</label><input id="fn_dept" placeholder="e.g. Computer Science and Engineering"></div>
+    <div class="mfield"><label>Google Drive Link *</label><input id="fn_drive" placeholder="https://drive.google.com/…"></div>
+    <div class="mfield"><label>User ID (uploader)</label><input id="fn_uid" type="number" value="1"></div>
+  `, async () => {
+    if (!val('fn_title') || !val('fn_subj') || !val('fn_drive')) throw new Error('Title, Subject and Drive Link are required.');
+    await API('/notes', { method: 'POST', body: {
+      user_id: val('fn_uid')||'1', title: val('fn_title'), description: val('fn_desc'),
+      subject: val('fn_subj'), semester: val('fn_sem'), type: val('fn_type'),
+      exam_type: val('fn_exam'), department: val('fn_dept'),
+      drive_link: val('fn_drive'), status: 'approved'
+    }});
+    loadNotes(); loadStats();
+  });
+}
+
+// ─── LOST & FOUND ─────────────────────────────────────────────────────────────
+async function loadLF() {
+  const tbody = document.getElementById('lfBody');
+  tbody.innerHTML = '<tr class="loading-row"><td colspan="9">Loading...</td></tr>';
+  try {
+    const rows = await API('/lost-found');
+    set('lf-count-lbl', rows.length + ' reports');
+    tbody.innerHTML = rows.length ? rows.map(lf => `
+      <tr>
+        <td class="cmono" style="color:var(--text3)">#${lf.id}</td>
+        <td><span class="cm">${esc(lf.title)}</span></td>
+        <td><span class="badge ${lf.type==='lost'?'br':'bg'}">${lf.type}</span></td>
+        <td style="color:var(--text2)">${esc(lf.location)}</td>
+        <td class="cmono">${esc(lf.contact||'—')}</td>
+        <td>${esc(lf.reporter_name||'—')}</td>
+        <td><span class="badge ${lf.status==='open'?'by':'bgr'}">${lf.status}</span></td>
+        <td style="color:var(--text3);font-size:.6875rem" title="${fmtDate(lf.created_at)}">${timeAgo(lf.created_at)}</td>
+        <td><div class="actions">
+          ${lf.status==='open'?`<button class="btn btn-resolve" onclick='quickLF(${lf.id},"resolved","${esc(lf.title)}")'>Resolve</button>`:''}
+          <button class="btn btn-edit" onclick='editLF(${jsonAttr(lf)})'>Edit</button>
+          <button class="btn btn-del" onclick="askDelete('lost-found',${lf.id},'${esc(lf.title)}')">Delete</button>
+        </div></td>
+      </tr>`).join('') : '<tr class="empty-row"><td colspan="9">No reports yet.</td></tr>';
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+async function quickLF(id, status, title) {
+  try {
+    await API('/lost-found/' + id, { method: 'PATCH', body: { status }});
+    toast(`"${title}" marked as ${status}`, 'success');
+    loadLF(); loadStats();
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function editLF(lf) {
+  modal('Edit Report', `
+    <div class="mfield"><label>Title</label><input id="fl_title" value="${esc(lf.title)}"></div>
+    <div class="mfield"><label>Description</label><textarea id="fl_desc">${esc(lf.description||'')}</textarea></div>
+    <div class="mrow">
+      <div class="mfield"><label>Type</label>
+        <select id="fl_type">${opts(['lost','found'],lf.type)}</select>
+      </div>
+      <div class="mfield"><label>Status</label>
+        <select id="fl_status">${opts(['open','resolved'],lf.status)}</select>
+      </div>
+    </div>
+    <div class="mfield"><label>Location</label><input id="fl_loc" value="${esc(lf.location)}"></div>
+    <div class="mfield"><label>Contact</label><input id="fl_contact" value="${esc(lf.contact||'')}"></div>
+  `, async () => {
+    await API('/lost-found/' + lf.id, { method: 'PATCH', body: {
+      title: val('fl_title'), description: val('fl_desc'),
+      type: val('fl_type'), status: val('fl_status'),
+      location: val('fl_loc'), contact: val('fl_contact')
+    }});
+    loadLF(); loadStats();
+  });
+}
+
+// ─── EVENTS ───────────────────────────────────────────────────────────────────
+async function loadEvents() {
+  const tbody = document.getElementById('eventsBody');
+  tbody.innerHTML = '<tr class="loading-row"><td colspan="9">Loading...</td></tr>';
+  try {
+    const rows = await API('/events');
+    set('ev-count-lbl', rows.length + ' events');
+    const catCls = {workshop:'by',hackathon:'bp',seminar:'bb',cultural:'bp',sports:'bg',club:'bc',tech:'bc',other:'bgr'};
+    tbody.innerHTML = rows.length ? rows.map(e => {
+      const isPast = e.event_date && new Date(e.event_date) < new Date();
+      const statusBadge = e.status === 'cancelled'
+        ? `<span class="badge br">cancelled</span>`
+        : isPast
+          ? `<span class="badge bgr">past</span>`
+          : `<span class="badge bg">upcoming</span>`;
+      return `
+      <tr>
+        <td class="cmono" style="color:var(--text3)">#${e.id}</td>
+        <td><span class="cm ctrunc" title="${esc(e.title)}">${esc(e.title)}</span></td>
+        <td><span class="badge ${catCls[e.category]||'bgr'}">${e.category}</span></td>
+        <td style="color:var(--text2)">${esc(e.venue)}</td>
+        <td class="cmono">${e.event_date}${e.event_time?' '+e.event_time:''}</td>
+        <td>${esc(e.organizer)}</td>
+        <td style="color:var(--text2)">${esc(e.poster_name||'Admin')}</td>
+        <td>${statusBadge}</td>
+        <td><div class="actions">
+          <button class="btn btn-edit" onclick='editEvent(${jsonAttr(e)})'>Edit</button>
+          <button class="btn btn-del" onclick="askDelete('events',${e.id},'${esc(e.title)}')">Delete</button>
+        </div></td>
+      </tr>`;
+    }).join('') : '<tr class="empty-row"><td colspan="9">No events yet.</td></tr>';
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function editEvent(ev) {
+  modal('Edit Event', `
+    <div class="mfield"><label>Title</label><input id="fe_title" value="${esc(ev.title)}"></div>
+    <div class="mfield"><label>Description</label><textarea id="fe_desc">${esc(ev.description||'')}</textarea></div>
+    <div class="mrow">
+      <div class="mfield"><label>Category</label>
+        <select id="fe_cat">${opts(['workshop','hackathon','seminar','cultural','sports','club','tech','other'],ev.category)}</select>
+      </div>
+      <div class="mfield"><label>Status</label>
+        <select id="fe_status">${opts(['upcoming','past','cancelled'],ev.status)}</select>
+      </div>
+    </div>
+    <div class="mfield"><label>Venue</label><input id="fe_venue" value="${esc(ev.venue)}"></div>
+    <div class="mrow">
+      <div class="mfield"><label>Date</label><input id="fe_date" type="date" value="${ev.event_date}"></div>
+      <div class="mfield"><label>Time</label><input id="fe_time" value="${esc(ev.event_time||'')}" placeholder="e.g. 4:00 PM"></div>
+    </div>
+    <div class="mrow">
+      <div class="mfield"><label>Organizer</label><input id="fe_org" value="${esc(ev.organizer)}"></div>
+      <div class="mfield"><label>Contact</label><input id="fe_contact" value="${esc(ev.contact||'')}"></div>
+    </div>
+    <div class="mfield"><label>Registration Link</label><input id="fe_reg" value="${esc(ev.registration_link||'')}" placeholder="https://forms.google.com/…"></div>
+  `, async () => {
+    await API('/events/' + ev.id, { method: 'PATCH', body: {
+      title: val('fe_title'), description: val('fe_desc'),
+      category: val('fe_cat'), status: val('fe_status'),
+      venue: val('fe_venue'), event_date: val('fe_date'),
+      event_time: val('fe_time'), organizer: val('fe_org'),
+      contact: val('fe_contact'), registration_link: val('fe_reg')
+    }});
+    loadEvents(); loadStats();
+  });
+}
+
+function openAddEvent() {
+  modal('Add Event', `
+    <div class="mfield"><label>Title *</label><input id="fe_title" placeholder="e.g. Machine Learning Workshop"></div>
+    <div class="mfield"><label>Description *</label><textarea id="fe_desc" placeholder="What is this event about?"></textarea></div>
+    <div class="mrow">
+      <div class="mfield"><label>Category</label>
+        <select id="fe_cat">${opts(['workshop','hackathon','seminar','cultural','sports','club','tech','other'])}</select>
+      </div>
+      <div class="mfield"><label>Venue *</label><input id="fe_venue" placeholder="e.g. Seminar Hall A"></div>
+    </div>
+    <div class="mrow">
+      <div class="mfield"><label>Date *</label><input id="fe_date" type="date"></div>
+      <div class="mfield"><label>Time</label><input id="fe_time" placeholder="e.g. 10:00 AM"></div>
+    </div>
+    <div class="mrow">
+      <div class="mfield"><label>Organizer *</label><input id="fe_org" placeholder="e.g. Tech Club CURAJ"></div>
+      <div class="mfield"><label>Contact</label><input id="fe_contact" placeholder="Phone number"></div>
+    </div>
+    <div class="mfield"><label>Registration Link</label><input id="fe_reg" placeholder="https://forms.google.com/…"></div>
+    <div class="mfield"><label>User ID (owner)</label><input id="fe_uid" type="number" value="1" placeholder="User ID to attribute this event to"></div>
+  `, async () => {
+    if (!val('fe_title') || !val('fe_venue') || !val('fe_date') || !val('fe_org')) throw new Error('Title, Venue, Date and Organizer are required.');
+    await API('/events', { method: 'POST', body: {
+      user_id: val('fe_uid') || '1', title: val('fe_title'), description: val('fe_desc'),
+      category: val('fe_cat'), venue: val('fe_venue'),
+      event_date: val('fe_date'), event_time: val('fe_time'),
+      organizer: val('fe_org'), contact: val('fe_contact'),
+      registration_link: val('fe_reg'), status: 'upcoming'
+    }});
+    loadEvents(); loadStats();
+  });
+}
+
+// ─── FEEDBACK ─────────────────────────────────────────────────────────────────
+let _fbRows = {};  // id → row, for detail view
+
+async function loadFeedback() {
+  const tbody = document.getElementById('fbBody');
+  tbody.innerHTML = '<tr class="loading-row"><td colspan="9">Loading...</td></tr>';
+  try {
+    const rows = await API('/feedback');
+    _fbRows = {};
+    rows.forEach(f => { _fbRows[f.id] = f; });
+    set('fb-count-lbl', rows.length + ' entries');
+    tbody.innerHTML = rows.length ? rows.map(f => {
+      const displayName = f.submitter_name || f.user_name || 'Anonymous';
+      const nameHtml = f.user_name && f.submitter_name && f.submitter_name !== f.user_name
+        ? esc(f.submitter_name) + ' <span style="color:var(--text3);font-size:.65rem">(' + esc(f.user_name) + ')</span>'
+        : esc(displayName);
+      const starsHtml = f.rating
+        ? Array.from({length: 5}, (_, i) =>
+            '<span style="color:' + (i < f.rating ? '#f59e0b' : 'var(--text3)') + '">' + (i < f.rating ? '\u2605' : '\u2606') + '</span>'
+          ).join('')
+        : '<span style="color:var(--text3)">—</span>';
+      return `
+        <tr>
+          <td class="cmono" style="color:var(--text3)">#${f.id}</td>
+          <td><span class="cm">${esc(f.title||'—')}</span></td>
+          <td style="color:var(--text2);max-width:200px;"><span class="ctrunc">${esc(f.body)}</span></td>
+          <td><span class="badge bo">${esc(f.category||'general')}</span></td>
+          <td style="white-space:nowrap;letter-spacing:.05em">${starsHtml}</td>
+          <td>${nameHtml}</td>
+          <td><span class="badge ${f.status==='open'?'by':f.status==='resolved'?'bg':'bgr'}">${f.status}</span></td>
+          <td style="color:var(--text3);font-size:.6875rem" title="${fmtDate(f.created_at)}">${timeAgo(f.created_at)}</td>
+          <td><div class="actions">
+            <button class="btn btn-view" onclick="openFeedback(${f.id})">View</button>
+            ${f.status!=='resolved'?`<button class="btn btn-resolve" onclick="quickFB(${f.id},'resolved')">Resolve</button>`:''}
+            <button class="btn btn-del" onclick="askDelete('feedback',${f.id},'feedback #${f.id}')">Delete</button>
+          </div></td>
+        </tr>`;
+    }).join('') : '<tr class="empty-row"><td colspan="9">No feedback yet.</td></tr>';
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+function openFeedback(id) {
+  const f = _fbRows[id];
+  if (!f) return;
+
+  const displayName = f.submitter_name || f.user_name || 'Anonymous';
+  const isAnon = !f.submitter_name && !f.user_name;
+
+  const starsHtml = f.rating
+    ? '<span style="font-size:1.5rem;letter-spacing:.1em">' +
+        Array.from({length: 5}, (_, i) =>
+          '<span style="color:' + (i < f.rating ? '#f59e0b' : 'var(--text3)') + '">' + (i < f.rating ? '\u2605' : '\u2606') + '</span>'
+        ).join('') +
+      '</span> <span style="font-size:.875rem;color:var(--text3);vertical-align:middle">' + f.rating + '/5</span>'
+    : '<span style="color:var(--text3);font-size:.875rem">No rating given</span>';
+
+  const body = `
+    <div style="display:flex;flex-direction:column;gap:1.1rem">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.875rem">
+        <div>
+          <div style="font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Student</div>
+          <div style="font-weight:600;font-size:.9375rem">${esc(displayName)}</div>
+          ${!isAnon && f.enrollment ? '<div style="font-size:.75rem;color:var(--text3);margin-top:.15rem">' + esc(f.enrollment) + '</div>' : ''}
+          ${f.submitter_name && f.user_name && f.submitter_name !== f.user_name ? '<div style="font-size:.72rem;color:var(--text3);margin-top:.15rem">Account: ' + esc(f.user_name) + '</div>' : ''}
+          ${isAnon ? '<div style="font-size:.72rem;color:var(--text3);margin-top:.15rem;font-style:italic">Anonymous (not logged in)</div>' : ''}
+          ${!f.submitter_name && f.user_name ? '<div style="font-size:.72rem;color:var(--text3);margin-top:.15rem;font-style:italic">Logged in, name not filled</div>' : ''}
+        </div>
+        <div>
+          <div style="font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Category</div>
+          <span class="badge bo" style="font-size:.8rem">${esc(f.category||'general')}</span>
+        </div>
+        <div>
+          <div style="font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Rating</div>
+          ${starsHtml}
+        </div>
+        <div>
+          <div style="font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.3rem">Status</div>
+          <span class="badge ${f.status==='open'?'by':f.status==='resolved'?'bg':'bgr'}">${f.status}</span>
+        </div>
+      </div>
+      <div>
+        <div style="font-size:.68rem;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.45rem">Message</div>
+        <div style="background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:.9rem 1rem;line-height:1.65;white-space:pre-wrap;font-size:.875rem;color:var(--text);max-height:260px;overflow-y:auto">${esc(f.body)}</div>
+      </div>
+      <div style="font-size:.72rem;color:var(--text3)">Submitted ${fmtDate(f.created_at)}</div>
+    </div>`;
+
+  const safeTitle = (f.title && f.title !== 'general' ? f.title : 'Feedback') + '  #' + f.id;
+  document.getElementById('modalTitle').textContent = safeTitle;
+  document.getElementById('modalBody').innerHTML = body;
+  const saveBtn = document.getElementById('modalSave');
+  if (f.status === 'open') {
+    saveBtn.textContent = '\u2713 Mark Resolved';
+    saveBtn.style.display = '';
+    saveBtn.onclick = async () => {
+      saveBtn.disabled = true; saveBtn.textContent = 'Resolving\u2026';
+      try {
+        await API('/feedback/' + f.id, { method: 'PATCH', body: { status: 'resolved' }});
+        toast('Marked as resolved', 'success');
+        closeModal();
+        loadFeedback();
+      } catch(e) {
+        toast(e.message, 'error');
+        saveBtn.disabled = false; saveBtn.textContent = '\u2713 Mark Resolved';
+      }
+    };
+  } else {
+    saveBtn.style.display = 'none';
+  }
+  document.getElementById('editModal').classList.add('open');
+}
+
+async function quickFB(id, status) {
+  try {
+    await API('/feedback/' + id, { method: 'PATCH', body: { status }});
+    toast('Marked as ' + status, 'success');
+    loadFeedback();
+  } catch(e) { toast(e.message, 'error'); }
+}
+
+// ─── DELETE CONFIRM ───────────────────────────────────────────────────────────
+let _delCb = null;
+function askDelete(table, id, name) {
+  document.getElementById('confirmTitle').textContent = 'Delete Record?';
+  document.getElementById('confirmMsg').innerHTML = `Permanently delete <strong>${esc(name)}</strong> (ID #${id})?<br>This action <strong>cannot be undone</strong>.`;
+  _delCb = async () => {
+    await API('/' + table + '/' + id, { method: 'DELETE' });
+    toast('Deleted successfully.', 'success');
+    closeConfirm();
+    const map = {'users':'users','marketplace':'marketplace','notes':'notes','lost-found':'lostfound','events':'events','feedback':'feedback'};
+    if (map[table]) { const fn = {users:loadUsers,marketplace:loadMarket,notes:loadNotes,lostfound:loadLF,events:loadEvents,feedback:loadFeedback}; fn[map[table]]?.(); }
+    loadStats();
+  };
+  document.getElementById('confirmOkBtn').onclick = async () => {
+    const btn = document.getElementById('confirmOkBtn');
+    btn.disabled = true; btn.textContent = 'Deleting…';
+    try { await _delCb(); }
+    catch(e) { toast(e.message, 'error'); closeConfirm(); }
+    finally { btn.disabled = false; btn.textContent = 'Delete'; }
+  };
+  document.getElementById('confirmDialog').classList.add('open');
+}
+function closeConfirm() {
+  document.getElementById('confirmDialog').classList.remove('open');
+  _delCb = null;
+}
+
+// ─── SQL CONSOLE ──────────────────────────────────────────────────────────────
+function setSql(q) {
+  document.getElementById('sqlInput').value = q;
+  showPage('query');
+}
+
+async function runQuery() {
+  const sql = document.getElementById('sqlInput').value.trim();
+  const result = document.getElementById('queryResult');
+  if (!sql) return;
+  result.className = 'sql-result';
+  result.textContent = '⏳ Running…';
+  try {
+    const d = await API('/query', { method: 'POST', body: { sql }});
+    if (d.rows !== undefined) {
+      if (!d.rows.length) {
+        result.className = 'sql-result empty';
+        result.textContent = '✓ Query returned 0 rows.';
+      } else {
+        const cols = Object.keys(d.rows[0]);
+        const colW = cols.map(c => Math.max(c.length, ...d.rows.map(r => String(r[c]??'').length), 6));
+        const header = cols.map((c,i) => c.padEnd(colW[i])).join('  ');
+        const sep    = cols.map((_,i) => '─'.repeat(colW[i])).join('  ');
+        const rowLines = d.rows.map(r => cols.map((c,i) => String(r[c]??'NULL').padEnd(colW[i])).join('  '));
+        result.className = 'sql-result';
+        result.textContent = header + '\n' + sep + '\n' + rowLines.join('\n') + '\n\n── ' + d.count + ' row' + (d.count!==1?'s':'') + ' returned ──';
+      }
+    } else {
+      result.className = 'sql-result';
+      result.textContent = '✓ ' + (d.message||'Done.') + (d.changes!==undefined ? '\n' + d.changes + ' row(s) affected.' : '');
+    }
+  } catch(e) {
+    result.className = 'sql-result error';
+    result.textContent = '✕ Error: ' + e.message;
+  }
+}
+
+// ─── MODAL ────────────────────────────────────────────────────────────────────
+let _saveCb = null;
+function modal(title, body, onSave) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalBody').innerHTML = body;
+  _saveCb = onSave;
+  document.getElementById('editModal').classList.add('open');
+  document.getElementById('modalSave').onclick = async () => {
+    const btn = document.getElementById('modalSave');
+    btn.disabled = true; btn.textContent = 'Saving…';
+    try {
+      await _saveCb();
+      toast('Saved!', 'success');
+      closeModal();
+    } catch(e) {
+      toast(e.message, 'error');
+    } finally {
+      btn.disabled = false; btn.textContent = 'Save Changes';
+    }
+  };
+  setTimeout(() => document.querySelector('#editModal input, #editModal select, #editModal textarea')?.focus(), 50);
+}
+function closeModal() {
+  document.getElementById('editModal').classList.remove('open');
+  document.getElementById('modalSave').style.display = '';
+  _saveCb = null;
+}
+document.getElementById('editModal').addEventListener('click', e => { if (e.target === document.getElementById('editModal')) closeModal(); });
+document.getElementById('confirmDialog').addEventListener('click', e => { if (e.target === document.getElementById('confirmDialog')) closeConfirm(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeConfirm(); }});
+
+// ─── TABLE FILTER ─────────────────────────────────────────────────────────────
+function filterTable(id, q) {
+  const lq = q.toLowerCase();
+  document.querySelectorAll('#' + id + ' tbody tr').forEach(tr => {
+    tr.style.display = !q || tr.textContent.toLowerCase().includes(lq) ? '' : 'none';
+  });
+}
+
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function set(id, v) { const el = document.getElementById(id); if (el) el.textContent = v; }
+function esc(s) {
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+function jsonAttr(obj) {
+  return JSON.stringify(obj).replace(/'/g, '&#39;').replace(/</g, '\\u003c').replace(/>/g, '\\u003e');
+}
+function opts(arr, selected = '') {
+  return arr.map(v => `<option value="${v}" ${v===selected?'selected':''}>${v||'(none)'}</option>`).join('');
+}
+function fmtDate(d) {
+  const dt = _parseTS(d);
+  if (!dt) return '—';
+  try { return dt.toLocaleDateString('en-IN', { day:'numeric', month:'short', year:'numeric' }); }
+  catch { return String(d).slice(0, 10); }
+}
+// Robust timestamp parser — handles all PostgreSQL formats including
+// '2026-03-14 01:15:30.123456+05:30' (space, microseconds, offset)
+function _parseTS(d) {
+  if (!d) return null;
+  if (d instanceof Date) return isNaN(d) ? null : d;
+  const s = String(d).trim();
+  let dt = new Date(s);
+  if (!isNaN(dt)) return dt;
+  // Normalize space→T, truncate microseconds to 3 digits, then retry
+  const norm = s.replace(' ', 'T').replace(/(\.\d{3})\d+/, '$1');
+  dt = new Date(norm);
+  if (!isNaN(dt)) return dt;
+  // Last resort: treat bare timestamp as UTC
+  dt = new Date(s.replace(' ', 'T').replace(/(\.\d+)?$/, '') + 'Z');
+  return isNaN(dt) ? null : dt;
+}
+
+function timeAgo(d) {
+  const dt = _parseTS(d);
+  if (!dt) return '—';
+  const diff = Date.now() - dt.getTime(); // always ms, always UTC-based ✓
+  if (diff < 0)        return 'just now';
+  if (diff < 55000)    return 'just now';
+  if (diff < 3600000)  return Math.floor(diff / 60000) + 'm ago';
+  if (diff < 86400000) return Math.floor(diff / 3600000) + 'h ago';
+  if (diff < 604800000) return Math.floor(diff / 86400000) + 'd ago';
+  return fmtDate(d);
+}
+
+function toast(msg, type = 'info') {
+  const icons = {
+    success: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>',
+    error:   '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+    info:    '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>',
+    warning: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/></svg>',
+  };
+  const cls = {success:'ts',error:'te',info:'ti',warning:'tw'};
+  const c = document.getElementById('toasts');
+  const t = document.createElement('div');
+  t.className = 'toast ' + (cls[type]||'ti');
+  t.innerHTML = `<div class="toast-icon">${icons[type]||icons.info}</div><span>${esc(msg)}</span>`;
+  c.appendChild(t);
+  setTimeout(() => { t.style.transition = 'all .3s'; t.style.opacity = '0'; t.style.transform = 'translateX(24px)'; setTimeout(() => t.remove(), 300); }, 3500);
+}
+</script>
+</body>
+</html>

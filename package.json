@@ -1,0 +1,26 @@
+{
+  "name": "cu-hub",
+  "version": "4.0.0",
+  "description": "CU Hub — Digital Campus Platform for CURAJ Students",
+  "main": "server/server.js",
+  "scripts": {
+    "setup": "node setup-admin.js",
+    "start": "node server/server.js",
+    "dev": "node --watch server/server.js"
+  },
+  "author": "Yash Agarwal <yashagarwal.connect@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "cloudinary": "^2.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^18.0.9",
+    "express": "^4.18.3",
+    "multer": "^2.0.0",
+    "pg": "^8.11.3",
+    "uuid": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}

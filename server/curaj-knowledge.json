@@ -1,0 +1,458 @@
+{
+  "_meta": {
+    "sources": "Official CURAJ data verified by developer (March 2026)",
+    "last_updated": "March 2026"
+  },
+  "university": {
+    "name": "Central University of Rajasthan",
+    "short_name": "CURAJ",
+    "established": "2009 (Act of Parliament)",
+    "type": "Central University — fully funded by Government of India",
+    "campus_size": "518 acres",
+    "location": "NH-8, Bandarsindri, Kishangarh, Ajmer, Rajasthan 305817",
+    "accreditation": "NAAC A++",
+    "ugc_category": "Category I",
+    "affiliations": [
+      "UGC",
+      "AIU",
+      "ACU"
+    ],
+    "website": "https://www.curaj.ac.in",
+    "email": "info@curaj.ac.in",
+    "phone": "01463-257504",
+    "placement_email": "placements@curaj.ac.in",
+    "motto": "Tejasvi Navadhitamastu",
+    "rankings": {
+      "nirf_2025_university": "89th among universities in India",
+      "nirf_2025_pharmacy": "29th in Pharmacy (NIRF 2025)",
+      "qs_asia_2026": "651-700 band",
+      "naac": "A++ (highest grade)"
+    },
+    "total_programs": "99+ UG, PG and PhD programs across all disciplines",
+    "faculty_student_ratio": "1:20 (approx)",
+    "campus_highlights": "Green 518-acre campus, smart classrooms with LED/smart boards, high-performance computing labs, modern science and engineering labs, sports complex, student activity centre"
+  },
+  "administration": {
+    "vice_chancellor": "Prof. Anand Bhalerao",
+    "vc_since": "24 January 2022",
+    "vc_qualification": "PhD in Civil Engineering, University of Pune",
+    "vc_experience": "35+ years in teaching, research and administration",
+    "vc_research": [
+      "Hydraulic Engineering",
+      "Sediment Transport",
+      "Project Management",
+      "Construction Management"
+    ],
+    "key_offices": {
+      "Academic Section": "Transcripts, marksheets, certificates — Admin Block (5-7 working days, ~Rs.100/copy)",
+      "Finance Section": "Fee payment issues — Admin Block",
+      "Dean Student Welfare": "Hostel allotment, scholarships, student grievances",
+      "Chief Warden": "All hostel-related matters",
+      "IT Cell": "WiFi credentials and internet issues — Admin Block",
+      "Placement Cell": "Campus placements and internships — placements@curaj.ac.in",
+      "Health Centre": "MBBS doctor, nurse, physiotherapist, ambulance on campus",
+      "DACE": "Free IAS coaching for SC/OBC — dace@curaj.ac.in"
+    }
+  },
+  "schools_and_departments": {
+    "School of Engineering and Technology": {
+      "building": "4A2 Building",
+      "dean": "Dr. Prakash Choudhary",
+      "departments": {
+        "Computer Science and Engineering": {
+          "short": "CSE",
+          "hod": "Prof. Basant Agarwal",
+          "programs": [
+            "B.Tech (4 yr)",
+            "M.Tech",
+            "PhD"
+          ],
+          "established": 2010,
+          "btech_admission": "JEE Main + JoSAA counselling",
+          "btech_fees_total": "~Rs.5.68 Lakhs for full B.Tech",
+          "jee_cutoff_2025": "AIR 43,274-80,874 (General)"
+        },
+        "Electronics and Communication Engineering": {
+          "short": "ECE",
+          "hod": "Prof. Rajan Singh",
+          "programs": [
+            "B.Tech",
+            "PhD"
+          ]
+        },
+        "Biomedical Engineering": {
+          "short": "BME",
+          "programs": [
+            "B.Tech",
+            "PhD"
+          ]
+        },
+        "Vocational Studies and Skill Development": {
+          "programs": [
+            "B.Voc",
+            "Skill Programs"
+          ]
+        }
+      },
+      "btech_rules": {
+        "duration": "4 years / 8 semesters",
+        "admission": "JEE Main",
+        "min_attendance": "75%",
+        "internal_marks": "30% (CIA-I + CIA-II, 20 marks each)",
+        "end_sem_marks": "70% (60 marks end-semester exam)",
+        "eligible_for_placement": "From 7th semester onwards"
+      }
+    },
+    "School of Mathematics Statistics and Computational Sciences": {
+      "departments": [
+        "Mathematics",
+        "Statistics",
+        "Computer Science",
+        "Data Science and Analytics"
+      ]
+    },
+    "School of Physical Sciences": {
+      "departments": [
+        "Physics"
+      ]
+    },
+    "School of Chemical Sciences and Pharmacy": {
+      "departments": [
+        "Chemistry",
+        "Pharmacy"
+      ],
+      "nirf_pharmacy": "29th nationally (NIRF 2025)"
+    },
+    "School of Life Sciences": {
+      "departments": [
+        "Biochemistry",
+        "Biotechnology",
+        "Microbiology"
+      ]
+    },
+    "School of Earth Sciences": {
+      "departments": [
+        "Atmospheric Science",
+        "Environmental Science"
+      ]
+    },
+    "School of Social Sciences": {
+      "departments": [
+        "Economics",
+        "Public Policy Law and Governance",
+        "Social Work",
+        "Society Technology Interface",
+        "Culture and Media Studies"
+      ]
+    },
+    "School of Commerce and Management": {
+      "departments": [
+        "Commerce",
+        "Management",
+        "Hotel and Tourism Management"
+      ]
+    },
+    "School of Humanities and Languages": {
+      "departments": [
+        "English",
+        "Hindi",
+        "Linguistics"
+      ]
+    },
+    "School of Sports Sciences Yoga and Education": {
+      "departments": [
+        "Sports Bioscience",
+        "Sports Biomechanics",
+        "Sports Psychology",
+        "Education",
+        "Yoga"
+      ]
+    },
+    "Interdisciplinary School of Health Sciences": {
+      "departments": [
+        "Health Sciences"
+      ]
+    }
+  },
+  "admissions": {
+    "ug": {
+      "mode": "CUET-UG (NTA)",
+      "btech": "JEE Main + JoSAA counselling",
+      "bvoc_bsc_bed": "NCET (National Common Entrance Test)",
+      "eligibility_general": "50% in 10+2",
+      "eligibility_reserved": "45% in 10+2 (SC/ST/OBC/PWD/EWS)",
+      "cuet_ug_cutoff_2025": "44-547 range depending on course; B.Sc Biotechnology highest at 547"
+    },
+    "pg": {
+      "mode": "CUET-PG (NTA)",
+      "mtech": "GATE via CCMT at MNIT Jaipur",
+      "msc": "JAM (via MNIT Jaipur)",
+      "mba": "CMAT/CAT/MAT",
+      "mpharm": "GPAT",
+      "eligibility": "50% in graduation (45% for reserved categories)"
+    },
+    "phd": {
+      "mode": "University entrance test + Interview (twice a year)",
+      "jrf_exemption": "JRF/NET holders exempt from written test",
+      "current_2025_26_second_phase": "Last date extended to 04 March 2026",
+      "departments_active_2025": "Biochemistry, English, Education, PPLG, Society Technology Interface + 17 more",
+      "apply_at": "www.curaj.ac.in"
+    },
+    "fee_payment": "Online via Samarth Student Portal at www.curaj.ac.in"
+  },
+  "course_fees": {
+    "note": "Approximate figures — check www.curaj.ac.in for exact amounts",
+    "btech_total_4yr": "~Rs.8.5 Lakhs (approx)",
+    "bsc_msc_integrated_cs_5yr": "Rs.29,610 (one of lowest-fee integrated programs in India)",
+    "msc_2yr": "Rs.10,000-Rs.58,000 depending on specialisation",
+    "mba_total": "~Rs.1.10 Lakhs for full course",
+    "ma_total": "~Rs.60,500",
+    "per_semester_breakdown": {
+      "academic_fee": "~Rs.8,500/semester (includes lab, library charges)",
+      "hostel_fee": "Rs.8500/semester",
+      "electricity_water": "~Rs.2,500/semester",
+      "mess_fee": "Rs.3000/month",
+      "hostel_security_deposit": "~Rs.3500 one-time refundable",
+      "annual_mess_approx": "~Rs.30,000-Rs.36,000/year"
+    },
+    "sc_st_cashback": "SC/ST categories receive fee cashback from government"
+  },
+  "academic_calendar_2024_25": {
+    "odd_semester": {
+      "classes_begin": "15 July 2024",
+      "cia_1": "19-23 August 2024",
+      "cia_2": "14-18 October 2024",
+      "mid_sem_break": "28 October - 1 November 2024",
+      "teaching_ends": "3 December 2024",
+      "end_sem_exams": "9-19 December 2024",
+      "result_declaration": "29 December 2024",
+      "winter_vacation": "30 December 2024 - 3 January 2025"
+    },
+    "even_semester": {
+      "classes_begin": "6 January 2025",
+      "cia_1": "10-14 February 2025",
+      "cia_2": "24-28 March 2025",
+      "end_sem_exams": "23 May - 5 June 2025",
+      "result_declaration": "15 June 2025",
+      "summer_vacation": "16 June - 5 July 2025",
+      "next_odd_sem_start": "Around 15 July 2025"
+    },
+    "exam_system": {
+      "cia_each": "20 marks (CIA-I and CIA-II)",
+      "end_sem": "60 marks",
+      "total": "100 marks",
+      "internal_percentage": "30% (CIA-I + CIA-II combined)",
+      "end_sem_percentage": "70%",
+      "min_attendance": "75% compulsory",
+      "backlog_window": "Separate backlog exam window before end-semester"
+    }
+  },
+  "hostels": {
+    "total": "8 hostels — 4 boys, 4 girls",
+    "named": [
+      "Captain Vikram Batra Hostel",
+      "Second Lieutenant Arun Khetarpal Hostel"
+    ],
+    "capacity": "Can house 2000+ students",
+    "room_types": "Single, double, and triple sharing",
+    "timings": {
+      "gate_open": "6:00 AM - 10:00 PM",
+      "girls_curfew": "10:00 PM strictly",
+      "boys": "Less strict but 10 PM standard",
+      "library": "Open till midnight — you can study there after hostel gate closes"
+    },
+    "room_amenities": [
+      "Bed/cot",
+      "Mattress",
+      "Study table",
+      "Chair",
+      "Almirah/wardrobe",
+      "24/7 electricity",
+      "WiFi"
+    ],
+    "mess": {
+      "meals": "3 meals daily — breakfast, lunch, dinner",
+      "type": "Vegetarian; one special dinner per month",
+      "breakfast": "Tea/coffee/milk + bread with butter and jam",
+      "lunch": "Dal, chapati, vegetable (changes daily), curd/chaach",
+      "dinner": "Sweets 3-4 days/week + regular items",
+      "quality_note": "Average to decent — quality depends on contractor; common student complaint",
+      "canteen": "Canteen available inside/near mess for extra snacks"
+    },
+    "fees": {
+      "hostel_per_semester": "Rs.8500/semester",
+      "hostel_annual": "~Rs.17000/year",
+      "mess_monthly": "Rs.3000/month",
+      "mess_annual": "~Rs.30,000-Rs.36,000/year",
+      "security_deposit_onetime": "~Rs.3500 (refundable)",
+      "combined_annual_approx": "~Rs.54,000-Rs.60,000/year (hostel + mess + electricity)"
+    },
+    "allotment": {
+      "process": "Fill hostel accommodation form at hostel office after admission — room typically allotted same day",
+      "priority_1": "Students from other states and foreign nationals",
+      "priority_2": "Students from Rajasthan beyond 100 km",
+      "priority_3": "Students within 25-100 km",
+      "local": "Within 25 km — considered only if vacancy remains",
+      "documents": [
+        "Hostel fee receipt",
+        "Anti-ragging affidavit (student + parent)",
+        "Health certificate",
+        "Character certificate",
+        "Aadhar copy",
+        "Admission letter"
+      ],
+      "renewal": "Fresh application every academic year"
+    },
+    "security": "24-hour security guards at all hostels",
+    "wifi": "Good WiFi in all hostels",
+    "issues_reported": "Water shortage sometimes; bathroom cleanliness varies; mega mess shared between two hostels"
+  },
+  "library": {
+    "type": "Hybrid collection — print and electronic",
+    "seating": "~400 students",
+    "collection": "Thousands of books + national and international journals",
+    "e_resources": "NPTEL, JSTOR, research databases — available 24/7 with student portal login",
+    "subjects_covered": "Science, Engineering, Management, Social Sciences, Languages, Humanities",
+    "open_till": "Midnight (12:00 AM) — students can study here after hostel gate closes at 10 PM"
+  },
+  "facilities": {
+    "internet": {
+      "speed": "1 Gbps via NKN-NMEICT",
+      "coverage": "All hostels and academic buildings",
+      "credentials": "Issued with enrollment number at admission",
+      "issues": "Contact IT Cell, Admin Block"
+    },
+    "health_centre": {
+      "staff": "MBBS Doctor, Nurse, Laboratory Attendant, Physiotherapist",
+      "equipment": "Medical equipment + ambulance on campus",
+      "counselling": "Regular counselling sessions available for mental health"
+    },
+    "gym": {
+      "open_to": "Both students and faculty",
+      "equipment": "Multi-press machines, Olympic incline/decline benches, pull-down vertical rows, powerlifting equipment"
+    },
+    "sports": {
+      "outdoor": [
+        "Cricket ground",
+        "Football ground (98.5m x 63.5m)",
+        "400m athletic track",
+        "Basketball courts (x2)",
+        "Volleyball courts (x2)",
+        "Lawn tennis courts (x4)",
+        "Handball court",
+        "Kabaddi ground",
+        "Boxing arena",
+        "Kho-Kho ground",
+        "Long jump and triple jump pit"
+      ],
+      "indoor": [
+        "Chess",
+        "Carom",
+        "Table Tennis"
+      ],
+      "other": [
+        "Yoga",
+        "Aerobics",
+        "Athletics"
+      ],
+      "teams": "University teams participate in regional and national competitions annually"
+    },
+    "bank_atm": {
+      "bank": "Bank of India (BOI) branch on campus",
+      "atm": "BOI ATM on campus",
+      "also": "ICICI Bank and SBI for university services"
+    },
+    "post_office": "Post office within campus",
+    "shopping": "Shops/vendors just behind the campus for groceries, stationery, food",
+    "guest_house": "70-room 3-storey guest house on campus",
+    "auditorium": "Auditorium for events, seminars, convocation",
+    "classrooms": "Smart boards, LED lighting, fans, AC in most departments",
+    "labs": "High-performance computing labs, modern science and engineering labs"
+  },
+  "placements": {
+    "cell_email": "placements@curaj.ac.in",
+    "cell_location": "Admin Block",
+    "nirf_2025_data": {
+      "ug_3yr_placed": "17 students",
+      "pg_2yr_placed": "231 students",
+      "pg_3yr_placed": "28 students",
+      "btech_note": "Mostly off-campus placements",
+      "ug_3yr_median": "Rs.2.52 LPA",
+      "pg_median": "Rs.3.50-Rs.5 LPA",
+      "mpharm_median_2024": "Rs.3.36 LPA"
+    },
+    "services": [
+      "Career counselling",
+      "Resume-building workshops",
+      "Mock interview sessions",
+      "Soft-skills training",
+      "Aptitude training",
+      "Internship facilitation"
+    ],
+    "internships": "Available via Internshala + direct tie-ups; opportunities at IITs, AIIMS, CSIR labs",
+    "honest_note": "Placement is stronger for technical/professional programs (CSE, Pharmacy, MBA). Pure science students often prefer PhD/research. CURAJ has research-oriented focus.",
+    "higher_studies": "Many students go for PhD at IITs, CSIR labs, IISc after CURAJ"
+  },
+  "student_life": {
+    "student_diversity": "Students from all states — Kerala, Telangana, Jharkhand, Bihar, HP, J&K, Tamil Nadu, Odisha and more. Very multicultural campus.",
+    "clubs": [
+      "Film Club",
+      "Music Club",
+      "Dance Club",
+      "Photography Club (Lenswala)",
+      "Mathletes",
+      "Economics Society",
+      "Navsrijan Society",
+      "NSS",
+      "Coding Club",
+      "Drama Society"
+    ],
+    "annual_festivals": [
+      "Marukriti",
+      "Economania",
+      "Math Earth",
+      "Myriad Hues"
+    ],
+    "sports_events": "Annual sports competitions in cricket, volleyball, basketball, handball etc.",
+    "campus_vibe": "Peaceful green campus, good for studies and research. Good senior-junior relations.",
+    "pros": [
+      "NAAC A++ accreditation",
+      "518-acre green campus",
+      "Affordable fees",
+      "Good WiFi",
+      "Modern infrastructure",
+      "Multicultural students",
+      "Strong research culture"
+    ],
+    "cons": [
+      "Far from city — Kishangarh ~18 km away",
+      "Mess food quality is average",
+      "Water shortage sometimes",
+      "Placement weaker for non-technical courses",
+      "Administration can be slow"
+    ]
+  },
+  "scholarships": {
+    "dace": {
+      "full_name": "Dr. Ambedkar Center of Excellence",
+      "scheme": "Free Civil Services Exam Coaching (Prelims + Mains)",
+      "for": "SC and OBC students",
+      "stipend": "Rs.4,000 per month",
+      "email": "dace@curaj.ac.in",
+      "apply": "www.curaj.ac.in"
+    },
+    "government": "National Scholarship Portal (NSP) for central and state government scholarships",
+    "internal": "Merit-based and need-based scholarships — contact Student Welfare Office",
+    "sc_st_fee_cashback": "SC/ST students get fee cashback from government schemes"
+  },
+  "location": {
+    "address": "NH-8, Bandarsindri, Kishangarh, Ajmer, Rajasthan 305817",
+    "bandarsindri_bus_stop": "2 km from campus",
+    "kishangarh": "~18 km",
+    "ajmer": "~30 km",
+    "jaipur": "~80 km",
+    "kishangarh_airport": "~29 km (~38 min drive)",
+    "gahlota_railway_station": "~18.7 km (~33 min drive)",
+    "nearby": "Shops, grocery stores, PG accommodations available just behind the campus"
+  }
+}

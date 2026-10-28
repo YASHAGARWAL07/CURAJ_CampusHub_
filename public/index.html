@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta name="referrer" content="no-referrer">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>CU Hub — Campus Companion | CURAJ</title>
+  <meta name="description" content="The all-in-one platform for Central University of Rajasthan students.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y1JN90EVFG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-Y1JN90EVFG');
+  </script>
+</head>
+<body>
+
+  <!-- ════ MOBILE TOPBAR ════ -->
+  <header class="mob-topbar" id="mobTopbar">
+    <button class="mob-topbar-hamburger" id="mobileMenuToggle" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="mob-topbar-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/></svg>
+      </div>
+      <div class="mob-topbar-brand-text">
+        <span class="mob-topbar-brand-name">CU HUB</span>
+        <span class="mob-topbar-brand-sub">Campus Companion</span>
+      </div>
+    </div>
+    <div class="mob-topbar-actions">
+      <button class="icon-btn" id="mobNotifBtn" aria-label="Notifications">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        <span class="notif-count" id="mobNotifCount" style="display:none">0</span>
+      </button>
+      <button class="mob-profile-btn" id="mobProfileBtn" aria-label="Profile">
+        <img src="" class="mob-prof-ava" alt="Profile" id="mobProfAva" onerror="if(window.CUAvatar){this.src=CUAvatar.generate('G',36,true);this.onerror=null;}">
+      </button>
+    </div>
+  </header>
+
+  <!-- ════ SIDEBAR ════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="currentColor"/></svg>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">CU HUB</span>
+          <span class="brand-sub">Campus Companion</span>
+        </div>
+      </div>
+      <!-- Desktop collapse button -->
+      <button class="sidebar-collapse" id="sidebarCollapseBtn" aria-label="Collapse sidebar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <!-- Mobile close button (✕) — only visible when sidebar is open on mobile -->
+      <button class="sidebar-close-mob" id="sidebarCloseMob" aria-label="Close menu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <nav class="nav">
+      <button class="nav-item active" data-page="dashboard">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+        <span class="nav-txt">Dashboard</span>
+      </button>
+      <button class="nav-item" data-page="marketplace">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg></span>
+        <span class="nav-txt">Marketplace</span>
+      </button>
+      <button class="nav-item" data-page="lost-found">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></span>
+        <span class="nav-txt">Lost &amp; Found</span>
+      </button>
+      <button class="nav-item" data-page="notes">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></span>
+        <span class="nav-txt">Notes &amp; PYQs</span>
+      </button>
+      <button class="nav-item" data-page="events">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></span>
+        <span class="nav-txt">Events &amp; Clubs</span>
+      </button>
+      <button class="nav-item nav-soon" data-page="rides">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="17" r="1"/><circle cx="17" cy="17" r="1"/><path d="M3 10l3-6h9l3 6"/><path d="M1 10h20v7a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/></svg></span>
+        <span class="nav-txt">Ride Share</span>
+        <span class="nav-soon-tag">Soon</span>
+      </button>
+      <button class="nav-item nav-soon" data-page="complaints">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></span>
+        <span class="nav-txt">Complaints</span>
+        <span class="nav-soon-tag">Soon</span>
+      </button>
+      <div class="nav-sep"></div>
+      <button class="nav-item" data-page="bookmarks">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg></span>
+        <span class="nav-txt">Bookmarks</span>
+        <span class="nav-badge" id="bmBadge" style="display:none">0</span>
+      </button>
+      <button class="nav-item" data-page="about">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+        <span class="nav-txt">About</span>
+      </button>
+      <button class="nav-item" data-page="feedback">
+        <span class="nav-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></span>
+        <span class="nav-txt">Feedback</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-foot">
+      <button class="theme-btn" id="themeToggle" title="Toggle theme">
+        <svg class="theme-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <span class="theme-lbl">Toggle Theme</span>
+      </button>
+      <div class="dev-card" onclick="Router.navigate('about')" title="Meet the developer">
+        <div class="dev-ava-wrap">
+          <img class="dev-ava" src="photo.jpeg" alt="Developer" id="devAva"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="dev-ava-fallback" id="devAvaFallback" style="display:none"></div>
+        </div>
+        <div class="dev-info">
+          <span class="dev-lbl">Built by</span>
+          <span class="dev-name">Yash Agarwal</span>
+        </div>
+        <svg class="dev-card-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><polyline points="9 18 15 12 9 6"/></svg>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ════ MAIN ════ -->
+  <main class="main" id="mainContent">
+
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="topbar-left">
+        <h1 class="greeting" id="greetingTitle">Good Morning, there</h1>
+        <p id="greetingSub" class="greeting-sub">Your campus hub awaits</p>
+      </div>
+      <div class="topbar-right">
+        <div class="search-wrap">
+          <svg class="search-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="globalSearch" class="search-input" placeholder="Search anything…" autocomplete="off">
+          <button id="searchClear" class="search-clear" style="display:none">✕</button>
+          <span class="search-kbd" id="searchKbd">⌘K</span>
+        </div>
+        <div class="notif-wrap">
+          <button class="icon-btn" id="notifBtn" aria-label="Notifications">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+            <span class="notif-count" id="notifCount" style="display:none">0</span>
+          </button>
+          <div class="notif-panel" id="notifDropdown">
+            <div class="notif-hd">
+              <span>🔔 Notifications</span>
+              <button id="markAllRead" class="txt-btn">Mark all read</button>
+            </div>
+            <div id="notifList"><div class="notif-loading">Loading…</div></div>
+          </div>
+        </div>
+        <div class="profile-wrap">
+          <button class="profile-btn" id="profileBtn">
+            <img src="" class="prof-ava" alt="Profile" id="profAva" onerror="if(window.CUAvatar){this.src=CUAvatar.generate('G',40,true);this.onerror=null;}">
+            <div class="prof-text">
+              <span id="profileName">Guest</span>
+              <span id="profileMeta">Click to login</span>
+            </div>
+            <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="profile-drop" id="profileDropdown">
+            <div class="drop-user-card" id="dropUserCard">
+              <img class="drop-user-card-ava" id="dropCardAva" src="" alt="" onerror="if(window.CUAvatar){this.src=CUAvatar.generate('G',36,true);this.onerror=null;}">
+              <div class="drop-user-card-info">
+                <div class="drop-user-card-name" id="dropCardName"></div>
+                <div class="drop-user-card-meta" id="dropCardMeta"></div>
+              </div>
+            </div>
+            <button class="drop-item" id="loginNavBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+              Login / Register
+            </button>
+            <button class="drop-item" id="viewProfileBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              View Profile
+            </button>
+            <div class="drop-divider"></div>
+            <button class="drop-item drop-danger" id="dropdownLogout" style="display:none">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ════ DASHBOARD ════ -->
+    <div id="dashboardPage" class="page" style="display:none">
+
+      <section class="stats-row">
+        <div class="stat-chip" onclick="Router.navigate('marketplace')">
+          <div class="stat-label">MARKETPLACE ITEMS </div>
+          <div class="stat-number" id="statMarket">—</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="--w:70%;background:var(--primary)"></div></div>
+        </div>
+        <div class="stat-chip" onclick="Router.navigate('lost-found')">
+          <div class="stat-label">LOST &amp; FOUND OPEN </div>
+          <div class="stat-number" id="statLF">—</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="--w:40%;background:var(--orange)"></div></div>
+        </div>
+        <div class="stat-chip" onclick="Router.navigate('notes')">
+          <div class="stat-label">STUDY RESOURCES </div>
+          <div class="stat-number" id="statNotes">—</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="--w:85%;background:var(--primary)"></div></div>
+        </div>
+        <div class="stat-chip" onclick="Router.navigate('events')">
+          <div class="stat-label">UPCOMING EVENTS </div>
+          <div class="stat-number" id="statEvents">—</div>
+          <div class="stat-bar"><div class="stat-bar-fill" style="--w:55%;background:var(--primary)"></div></div>
+        </div>
+      </section>
+
+      <div class="feat-grid">
+        <!-- Marketplace -->
+        <article class="feat-card" onclick="Router.navigate('marketplace')" style="cursor:pointer">
+          <div class="feat-icon-wrap" style="background:#22c55e">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="26" height="26"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          </div>
+          <span class="feat-badge live">LIVE</span>
+          <h3>Marketplace</h3>
+          <p>Buy and sell second-hand books, electronics, and stationery with verified CURAJ students at student-friendly prices.</p>
+          <button class="feat-action-btn" onclick="event.stopPropagation();Router.navigate('marketplace')">Explore Items →</button>
+        </article>
+
+        <!-- Lost & Found -->
+        <article class="feat-card" onclick="Router.navigate('lost-found')" style="cursor:pointer">
+          <div class="feat-icon-wrap" style="background:#ec4899">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="26" height="26"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <span class="feat-badge active">ACTIVE</span>
+          <h3>Lost &amp; Found</h3>
+          <p>Report lost items or search for found belongings across campus. Help the community reunite with their belongings.</p>
+          <button class="feat-action-btn" onclick="event.stopPropagation();Router.navigate('lost-found')">Browse Items →</button>
+        </article>
+
+        <!-- Notes & PYQs -->
+        <article class="feat-card" onclick="Router.navigate('notes')" style="cursor:pointer">
+          <div class="feat-icon-wrap" style="background:#f59e0b">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="26" height="26"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          </div>
+          <span class="feat-badge trending">🔥 TRENDING</span>
+          <h3>Notes &amp; PYQs</h3>
+          <p>Access comprehensive study materials and previous year question papers shared by seniors across all departments.</p>
+          <button class="feat-action-btn" onclick="event.stopPropagation();Router.navigate('notes')">Open Library →</button>
+        </article>
+
+        <!-- Events & Clubs -->
+        <article class="feat-card" onclick="Router.navigate('events')" style="cursor:pointer">
+          <div class="feat-icon-wrap" style="background:#8b5cf6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="26" height="26"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <h3>Events &amp; Clubs</h3>
+          <p>Discover workshops, hackathons, and exciting club activities happening on campus. Never miss an opportunity.</p>
+          <button class="feat-action-btn" onclick="event.stopPropagation();Router.navigate('events')">View Events →</button>
+        </article>
+
+        <!-- Ride Share -->
+        <article class="feat-card feat-card-muted" onclick="ComingSoonModal.open('rides')" style="cursor:pointer">
+          <div class="feat-icon-wrap" style="background:#3b82f6">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="26" height="26"><circle cx="5" cy="17" r="1"/><circle cx="17" cy="17" r="1"/><path d="M3 10l3-6h9l3 6"/><path d="M1 10h20v7a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/></svg>
+          </div>
+          <span class="feat-badge soon">COMING SOON</span>
+          <h3>Ride Share</h3>
+          <p>Find or offer rides with verified students heading the same direction. Safe, convenient, and eco-friendly commuting.</p>
+          <button class="feat-action-btn feat-ghost" onclick="event.stopPropagation();ComingSoonModal.open('rides')">Notify Me 🔔</button>
+        </article>
+
+        <!-- Complaints -->
+        <article class="feat-card feat-card-muted" onclick="ComingSoonModal.open('complaints')" style="cursor:pointer">
+          <div class="feat-icon-wrap" style="background:#ef4444">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" width="26" height="26"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <span class="feat-badge soon">COMING SOON</span>
+          <h3>Complaints</h3>
+          <p>Register campus issues — hostel, mess, infrastructure — and track their resolution progress anonymously.</p>
+          <button class="feat-action-btn feat-ghost" onclick="event.stopPropagation();ComingSoonModal.open('complaints')">Notify Me 🔔</button>
+        </article>
+      </div>
+    </div>
+
+    <!-- ════ MARKETPLACE ════ -->
+    <div id="marketplacePage" class="page" style="display:none">
+      <div class="page-header">
+        <div><h2 class="page-title">🛒 Student Marketplace</h2><p class="page-subtitle">Buy &amp; sell with verified CURAJ students</p></div>
+        <button class="cu-btn" onclick="AuthService.requireLogin(()=>PostModals.openMarketplace())">+ List Item</button>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-chip active" onclick="MarketplaceModule.filter('all');setActiveFilter(this)">All</button>
+        <button class="filter-chip" onclick="MarketplaceModule.filter('books');setActiveFilter(this)">📚 Books</button>
+        <button class="filter-chip" onclick="MarketplaceModule.filter('electronics');setActiveFilter(this)">💻 Electronics</button>
+        <button class="filter-chip" onclick="MarketplaceModule.filter('stationery');setActiveFilter(this)">✏️ Stationery</button>
+        <button class="filter-chip" onclick="MarketplaceModule.filter('furniture');setActiveFilter(this)">🪑 Furniture</button>
+        <button class="filter-chip" onclick="MarketplaceModule.filter('other');setActiveFilter(this)">📦 Other</button>
+      </div>
+      <div id="marketplaceGrid" class="cards-grid"></div>
+    </div>
+
+    <!-- ════ LOST & FOUND ════ -->
+    <div id="lostfoundPage" class="page" style="display:none">
+      <div class="page-header">
+        <div><h2 class="page-title">🔍 Lost &amp; Found</h2><p class="page-subtitle">Report or find lost belongings on campus</p></div>
+        <button class="cu-btn" onclick="AuthService.requireLogin(()=>PostModals.openLostFound())">+ Report Item</button>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-chip active" onclick="LostFoundModule.filter('all');setActiveFilter(this)">All</button>
+        <button class="filter-chip" onclick="LostFoundModule.filter('lost');setActiveFilter(this)">🔴 Lost</button>
+        <button class="filter-chip" onclick="LostFoundModule.filter('found');setActiveFilter(this)">🟢 Found</button>
+      </div>
+      <div id="lostFoundGrid" class="cards-grid"></div>
+    </div>
+
+    <!-- ════ NOTES & PYQs ════ -->
+    <div id="notesPage" class="page" style="display:none">
+      <div class="page-header">
+        <div><h2 class="page-title">📚 Notes &amp; PYQs</h2><p class="page-subtitle">Study materials and previous year papers from seniors</p></div>
+        <button class="cu-btn" onclick="AuthService.requireLogin(()=>PostModals.openNotes())">+ Upload</button>
+      </div>
+      <div class="tab-bar">
+        <button class="notes-tab tab-btn active" data-tab="notes" onclick="NotesModule.load('notes')">📝 Notes</button>
+        <button class="notes-tab tab-btn" data-tab="pyq" onclick="NotesModule.load('pyq')">📋 PYQ Papers</button>
+      </div>
+      <div id="notesFilterBar" class="notes-filter-bar" style="display:none"></div>
+      <div id="notesGrid" class="cards-grid"></div>
+    </div>
+
+    <!-- ════ EVENTS ════ -->
+    <div id="eventsPage" class="page" style="display:none">
+      <div class="page-header">
+        <div><h2 class="page-title">🗓️ Events &amp; Clubs</h2><p class="page-subtitle">Upcoming campus activities and club announcements</p></div>
+        <button class="cu-btn" onclick="AuthService.requireLogin(()=>PostModals.openEvent())">+ Post Event</button>
+      </div>
+      <div class="filter-bar">
+        <button class="filter-chip active" onclick="EventsModule.filter('all');setActiveFilter(this)">All</button>
+        <button class="filter-chip" onclick="EventsModule.filter('workshop');setActiveFilter(this)">🔧 Workshop</button>
+        <button class="filter-chip" onclick="EventsModule.filter('hackathon');setActiveFilter(this)">💻 Hackathon</button>
+        <button class="filter-chip" onclick="EventsModule.filter('cultural');setActiveFilter(this)">🎭 Cultural</button>
+        <button class="filter-chip" onclick="EventsModule.filter('sports');setActiveFilter(this)">⚽ Sports</button>
+        <button class="filter-chip" onclick="EventsModule.filter('seminar');setActiveFilter(this)">🎤 Seminar</button>
+        <button class="filter-chip" onclick="EventsModule.filter('club');setActiveFilter(this)">👥 Club</button>
+        <button class="filter-chip" onclick="EventsModule.filter('tech');setActiveFilter(this)">🖥️ Tech</button>
+      </div>
+      <div id="eventsGrid" class="cards-grid"></div>
+    </div>
+
+    <!-- ════ BOOKMARKS ════ -->
+    <div id="bookmarksPage" class="page" style="display:none">
+      <div class="page-header"><div><h2 class="page-title">🔖 Bookmarks</h2><p class="page-subtitle">Your saved items across CU Hub</p></div></div>
+      <div id="bookmarksGrid" class="cards-grid"></div>
+    </div>
+
+    <!-- ════ AI ASSISTANT ════ -->
+    <div id="aiPage" class="page" style="display:none">
+      <div class="ai-page-wrap">
+        <div class="ai-page-header">
+          <div class="ai-page-avatar">
+            <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" width="36" height="36">
+              <circle cx="24" cy="24" r="24" fill="url(#aig)"/>
+              <path d="M15 20c0-4.97 4.03-9 9-9s9 4.03 9 9v1.5H15V20z" fill="#fff"/>
+              <rect x="12" y="21.5" width="24" height="13" rx="4" fill="#fff"/>
+              <circle cx="20" cy="28" r="2.2" fill="rgba(91,95,199,0.85)"/>
+              <circle cx="28" cy="28" r="2.2" fill="rgba(91,95,199,0.85)"/>
+              <path d="M20 32.5c1.2 1.1 3.8 1.5 4 1.5s2.8-.4 4-1.5" stroke="rgba(91,95,199,0.85)" stroke-width="1.5" stroke-linecap="round"/>
+              <defs><linearGradient id="aig" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse"><stop stop-color="#5b5fc7"/><stop offset="1" stop-color="#7c3aed"/></linearGradient></defs>
+            </svg>
+            <div class="ai-page-online"></div>
+          </div>
+          <div>
+            <h2 class="ai-page-name">CURAJ Assistant</h2>
+            <p class="ai-page-desc">CURAJ AI Assistant · Ask anything about campus</p>
+          </div>
+          <button class="ai-page-clear-btn" id="aiPageClearBtn" title="Clear conversation">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.88"/></svg>
+            Clear
+          </button>
+        </div>
+
+        <div class="ai-page-chips" id="aiSuggestions"></div>
+
+        <div class="ai-page-chat" id="aiChat"></div>
+
+        <div class="ai-page-input-wrap">
+          <div class="ai-page-input-row">
+            <input type="text" id="aiInput" class="ai-page-input"
+              placeholder="Tell me about CURAJ…"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              inputmode="text"
+              enterkeyhint="send"
+              name="search"
+              readonly
+              onfocus="this.removeAttribute('readonly')"
+              maxlength="500">
+            <button id="aiSendBtn" class="ai-page-send">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            </button>
+          </div>
+          <div class="ai-page-hint">CURAJ AI · For campus information only</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ FEEDBACK ════ — Matching Screenshot 3 exactly -->
+    <div id="feedbackPage" class="page" style="display:none">
+      <div class="feedback-container">
+        <span class="about-pill">SHARE YOUR THOUGHTS</span>
+        <h2 class="feedback-title">Give Feedback</h2>
+        <p class="feedback-sub">Help us make CU Hub better for every CURAJ student.</p>
+
+        <div class="feedback-form">
+          <div class="form-group">
+            <label class="cu-label">Your Name <span style="color:var(--text-muted);font-weight:500">(optional)</span></label>
+            <input type="text" id="fbName" class="cu-input" placeholder="Yash Agarwal" autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label class="cu-label">Feedback Type</label>
+            <select id="fbCategory" class="cu-input">
+              <option value="general">General Feedback</option>
+              <option value="bug">🐛 Bug Report</option>
+              <option value="feature">✨ Feature Request</option>
+              <option value="ui">🎨 UI/UX Suggestion</option>
+              <option value="other">📌 Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="cu-label">Your Feedback <span style="color:var(--danger)">*</span></label>
+            <textarea id="fbText" class="cu-input" rows="5" placeholder="Tell us what you think, what's broken, or what you'd love to see next…" maxlength="2000"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="cu-label">Rate your experience</label>
+            <div class="star-rating" id="starRating">
+              <button class="star-btn active" data-val="1" onclick="setRating(1)" title="1 star">⭐</button>
+              <button class="star-btn active" data-val="2" onclick="setRating(2)" title="2 stars">⭐</button>
+              <button class="star-btn active" data-val="3" onclick="setRating(3)" title="3 stars">⭐</button>
+              <button class="star-btn" data-val="4" onclick="setRating(4)" title="4 stars">⭐</button>
+              <button class="star-btn" data-val="5" onclick="setRating(5)" title="5 stars">⭐</button>
+            </div>
+          </div>
+          <button class="feedback-submit-btn" onclick="submitFeedback()">Submit Feedback</button>
+          <p class="feedback-contact">You can also reach out directly at <a href="mailto:yashagarwal.connect@gmail.com" class="feedback-email-link">yashagarwal.connect@gmail.com</a></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ════ ABOUT PAGE ════ -->
+    <div id="aboutPage" class="page about-page" style="display:none">
+      <div class="about-hero">
+        <span class="about-hero-badge">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z"/></svg>
+          CURAJ'S DIGITAL CAMPUS
+        </span>
+        <h1>The Future of<br><em>Campus Life</em><br>is Here.</h1>
+        <p class="about-hero-sub">One platform. Every student. Every need.</p>
+        <p class="about-hero-desc">CU Hub reimagines how students at Central University of Rajasthan connect, share, and thrive together.</p>
+        <div class="about-stats">
+          <div class="about-stat-item"><span class="about-stat-num">500+</span><div class="about-stat-lbl">Students</div></div>
+          <div class="about-stat-item"><span class="about-stat-num">6</span><div class="about-stat-lbl">Features</div></div>
+          <div class="about-stat-item"><span class="about-stat-num">24/7</span><div class="about-stat-lbl">AI Assistant</div></div>
+          <div class="about-stat-item"><span class="about-stat-num">20</span><div class="about-stat-lbl">Departments</div></div>
+        </div>
+      </div>
+      <div class="about-divider"></div>
+
+      <div class="about-section about-mission-section">
+        <span class="about-pill">OUR MISSION</span>
+        <h2 class="about-section-title about-title-center">Built for Students, by a Student</h2>
+        <p class="about-mission-text">
+<strong>CU Hub</strong> was born from a simple frustration — CURAJ students had no central, modern platform to connect with each other, share resources, or solve everyday campus problems. Most solutions were scattered across WhatsApp groups, notice boards, and word-of-mouth, making it difficult for students to find what they needed quickly.
+</p>
+        <p class="about-mission-text">
+So CU Hub was built — a <strong>full-stack platform</strong> designed specifically for the CURAJ community. It brings together essential student needs in one place: buying and selling books, sharing study materials, reporting and finding lost items, and discovering campus events.
+</p>
+        <div class="about-blockquote">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" width="20" height="20"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+         Built with a focus on reliability, privacy, and a smooth experience for every student.
+        </div>
+        <h2 class="about-section-title about-made-with">Built with ❤️ for the CURAJ community</h2>
+      </div>
+
+      <div class="about-section">
+        <span class="about-pill">WHAT'S INSIDE</span>
+        <h2 class="about-section-title">Every Feature You Need</h2>
+        <div class="about-feat-grid">
+          <div class="about-feat-card"><div class="about-feat-icon" style="background:rgba(34,197,94,.12)">🛒</div><h3>Marketplace</h3><p class="about-feat-subtitle">BUY · SELL · TRADE</p><ul class="about-feat-list"><li>Student-verified listings</li><li>Books, electronics, stationery</li><li>Direct contact with sellers</li></ul><div class="about-feat-status">LIVE</div></div>
+          <div class="about-feat-card"><div class="about-feat-icon" style="background:rgba(236,72,153,.12)">🔍</div><h3>Lost &amp; Found</h3><p class="about-feat-subtitle">REUNITE · REPORT · RESOLVE</p><ul class="about-feat-list"><li>Report lost or found items</li><li>Location-based filtering</li><li>Mark as resolved when found</li></ul><div class="about-feat-status">LIVE</div></div>
+          <div class="about-feat-card"><div class="about-feat-icon" style="background:rgba(245,158,11,.12)">📚</div><h3>Notes &amp; PYQs</h3><p class="about-feat-subtitle">SHARE · LEARN · ACE</p><ul class="about-feat-list"><li>Previous Year Questions</li><li>Department-wise filtering</li><li>PDF, DOCX, PPT uploads</li></ul><div class="about-feat-status">LIVE</div></div>
+          <div class="about-feat-card"><div class="about-feat-icon" style="background:rgba(139,92,246,.12)">🗓️</div><h3>Events &amp; Clubs</h3><p class="about-feat-subtitle">DISCOVER · ATTEND · ORGANISE</p><ul class="about-feat-list"><li>Hackathons, workshops, fests</li><li>Club announcements</li><li>Create and manage events</li></ul><div class="about-feat-status">LIVE</div></div>
+          <div class="about-feat-card"><div class="about-feat-icon" style="background:rgba(59,130,246,.12)">🚗</div><h3>Ride Share</h3><p class="about-feat-subtitle">CAMPUS · CITY · BEYOND</p><ul class="about-feat-list"><li>Verified student carpooling</li><li>Jaipur, Ajmer routes</li><li>Eco-friendly commuting</li></ul><div class="about-feat-status soon">COMING SOON</div></div>
+          <div class="about-feat-card"><div class="about-feat-icon" style="background:rgba(239,68,68,.12)">📋</div><h3>Complaints</h3><p class="about-feat-subtitle">REPORT · TRACK · RESOLVE</p><ul class="about-feat-list"><li>Anonymous reporting</li><li>Hostel, mess, infra issues</li><li>Real-time resolution tracking</li></ul><div class="about-feat-status soon">COMING SOON</div></div>
+        </div>
+      </div>
+
+      <div class="about-ai-wrapper">
+        <div class="about-ai-section">
+          <div class="ai-orb-wrapper">
+            <div class="ai-orb-glow"></div>
+            <div class="orbit-dot"></div><div class="orbit-dot"></div><div class="orbit-dot"></div>
+            <div class="ai-orb">💬</div>
+          </div>
+          <div class="about-ai-content">
+            <span class="about-pill">AI-POWERED</span>
+            <h3>Meet Your CURAJ Assistant</h3>
+            <p>Available 24/7, the CURAJ AI Assistant is your intelligent campus companion — powered by cutting-edge language models and deeply aware of your campus context.</p>
+            <ul class="about-ai-checklist">
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Ask anything about campus, hostels, or academic procedures</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Get smart recommendations for notes, events, and marketplace</li>
+              <li><svg viewBox="0 0 24 24" fill="none" stroke="var(--primary)" stroke-width="2.5" width="16" height="16"><polyline points="20 6 9 17 4 12"/></svg> Understands CURAJ's 20 departments and all programs</li>
+            </ul>
+            <button class="cu-btn" onclick="Router.navigate('ai')">Chat with AI →</button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+      <div class="about-section">
+        <span class="about-pill">GETTING STARTED</span>
+        <h2 class="about-section-title">Up in 3 Steps</h2>
+        <div class="about-steps">
+          <div class="step-item"><div class="step-num">1</div><div><h4>Register with Your Enrollment Number</h4><p>Click the profile icon and sign up with your CURAJ enrollment number, phone number, and a password. Only verified CURAJ students can join.</p></div></div>
+          <div class="step-item"><div class="step-num">2</div><div><h4>Choose Your Department &amp; Program</h4><p>Select from all 20 CURAJ departments and their respective programs for a personalised experience.</p></div></div>
+          <div class="step-item"><div class="step-num">3</div><div><h4>Explore &amp; Contribute</h4><p>Browse the Marketplace, upload notes, report lost items, discover events, and use <code class="inline-code">⌘K</code> to search anything instantly.</p></div></div>
+        </div>
+      </div>
+
+      <div class="about-dev-wrapper">
+        <div class="about-dev-header">
+          <span class="about-pill about-pill-center">THE CREATOR</span>
+          <h2 class="about-section-title about-section-title-center">Meet the Developer</h2>
+          <p class="about-dev-intro">Designed and developed CU Hub for CURAJ students.</p>
+        </div>
+        <div class="about-dev-section">
+          <div class="dev-photo-col">
+            <div class="dev-photo-frame">
+              <img src="photo.jpeg" class="dev-photo" alt="Yash Agarwal">
+              <div class="dev-photo-ring"></div>
+            </div>
+          </div>
+          <div class="dev-content">
+            <div class="dev-role-badge">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="13" height="13"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              CREATOR &amp; LEAD DEVELOPER
+            </div>
+            <div class="dev-name-heading">Yash Agarwal</div>
+            <div class="dev-title-row">
+              <span class="dev-tech-tag">Node.js</span>
+              <span class="dev-tech-tag">Express</span>
+              <span class="dev-tech-tag">PostgreSQL</span>
+              <span class="dev-tech-tag">REST API</span>
+            </div>
+            <div class="dev-university">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              Central University of Rajasthan, Ajmer
+            </div>
+            <p class="dev-bio">Passionate about building scalable products that solve real problems. CU Hub is a campus platform designed to streamline lost & found, student marketplace, academic resources, and campus events at CURAJ — turning scattered WhatsApp groups into one secure and structured system.</p>
+            <div class="dev-links">
+              <a href="https://yashagarwalportfolio-roan.vercel.app/" target="_blank" rel="noopener" class="dev-link">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+                Portfolio
+              </a>
+              <a href="https://github.com/YASHAGARWAL07" target="_blank" rel="noopener" class="dev-link">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/yash-agarwal0007/" target="_blank" rel="noopener" class="dev-link">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="15" height="15"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                LinkedIn
+              </a>
+            </div>
+            <div class="dev-email-row">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <a href="mailto:Yashagarwal.connect@gmail.com">Yashagarwal.connect@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-cta">
+        <h2>Ready to Explore CU Hub?</h2>
+        <p>Join hundreds of CURAJ students already using the platform. Your campus life, supercharged.</p>
+        <button class="cu-btn" onclick="Router.navigate('dashboard')" style="padding:.9rem 2.25rem;font-size:1rem">Start Exploring →</button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ════ COMING SOON MODAL (Rides & Complaints) ════ -->
+  <div id="comingSoonModal" class="modal-overlay" style="display:none">
+    <div class="coming-soon-modal">
+      <button class="modal-close" onclick="ComingSoonModal.close()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-emoji" id="csModalEmoji">🚗</div>
+      <h3 class="modal-heading" id="csModalTitle">Ride Share is Coming Soon!</h3>
+      <p class="modal-desc" id="csModalDesc">We're building a safe, student-verified carpooling system. Share rides to Jaipur, Ajmer and beyond with verified CURAJ peers.</p>
+      <div class="modal-progress-wrap">
+        <div class="modal-progress-hd"><span>Development Progress</span><span id="csModalPct">65%</span></div>
+        <div class="modal-progress-bar"><div class="modal-progress-fill" id="csModalFill" style="width:65%"></div></div>
+      </div>
+      <button class="modal-notify-btn" onclick="ComingSoonModal.notify()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+        Notify Me When Ready
+      </button>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="authOverlay" class="auth-overlay">
+    <div class="auth-modal">
+      <button id="authCloseBtn" class="auth-close">✕</button>
+      <div class="auth-logo">
+        <div style="width:44px;height:44px;border-radius:12px;background:linear-gradient(135deg,var(--primary),var(--primary-dark));display:flex;align-items:center;justify-content:center;margin:0 auto .875rem">
+          <svg viewBox="0 0 24 24" fill="none" width="22" height="22"><path d="M13 2L3 14H12L11 22L21 10H12L13 2Z" fill="#fff"/></svg>
+        </div>
+        <h2 style="font-size:1.4rem;font-weight:900;margin:0 0 .25rem">Welcome to CU Hub</h2>
+        <p style="color:var(--text-muted);font-size:.875rem;margin:0">Campus companion for CURAJ students</p>
+      </div>
+      <div class="auth-tabs">
+        <button id="authTabLogin" class="auth-tab active" onclick="AuthUI.switchTab('login')">Login</button>
+        <button id="authTabRegister" class="auth-tab" onclick="AuthUI.switchTab('register')">Register</button>
+      </div>
+      <div id="loginPane" class="auth-pane active">
+        <form id="loginForm">
+          <div class="form-group"><label class="cu-label">Phone Number</label><input type="tel" id="loginPhone" class="cu-input" placeholder="10-digit phone number" required></div>
+          <div class="form-group"><label class="cu-label">Password</label><input type="password" id="loginPassword" class="cu-input" placeholder="Your password" required></div>
+          <button type="submit" class="cu-btn" style="width:100%;margin-top:.5rem">Login</button>
+        </form>
+        <p style="text-align:center;margin-top:.6rem">
+          <a href="#" id="showForgotLink" style="color:var(--text-muted);font-size:.82rem">Forgot password?</a>
+        </p>
+        <p style="text-align:center;margin-top:.5rem;font-size:.875rem;color:var(--text-muted)">Don't have an account? <a href="#" id="showRegisterLink" style="color:var(--primary);font-weight:700">Register here</a></p>
+      </div>
+      <div id="registerPane" class="auth-pane">
+        <form id="registerForm">
+          <div class="form-group"><label class="cu-label">Full Name</label><input type="text" id="regName" class="cu-input" placeholder="Your full name" required></div>
+          <div class="form-group"><label class="cu-label">Enrollment Number</label><input type="text" id="regEnrollment" class="cu-input" placeholder="e.g. 22CUCSE001" required></div>
+          <div class="form-group"><label class="cu-label">Department</label>
+            <select id="regDepartment" class="cu-input" required></select>
+          </div>
+          <div class="form-group"><label class="cu-label">Program</label>
+            <select id="regProgram" class="cu-input"></select>
+          </div>
+          <div class="form-group"><label class="cu-label">Semester</label>
+            <select id="regSemester" class="cu-input" required></select>
+          </div>
+          <div class="form-group"><label class="cu-label">Phone</label><input type="tel" id="regPhone" class="cu-input" placeholder="10-digit" required></div>
+          <div class="form-group"><label class="cu-label">Password</label><input type="password" id="regPassword" class="cu-input" placeholder="Create a password" required></div>
+          <button type="submit" class="cu-btn" style="width:100%;margin-top:.5rem">Create Account</button>
+        </form>
+        <p style="text-align:center;margin-top:1rem;font-size:.875rem;color:var(--text-muted)">Already registered? <a href="#" id="showLoginLink" style="color:var(--primary);font-weight:700">Login here</a></p>
+      </div>
+
+      <!-- ── Forgot Password Pane ── -->
+      <div id="forgotPane" class="auth-pane" style="display:none">
+        <div id="forgotStep1">
+          <h3 style="margin:0 0 .5rem;font-size:1.1rem;font-weight:800">Forgot Password?</h3>
+          <p style="margin:0 0 1.25rem;font-size:.84rem;color:var(--text-muted);line-height:1.5">Enter your enrollment number. We'll send a reset link to your CURAJ university email.</p>
+          <form id="forgotForm">
+            <div class="form-group">
+              <label class="cu-label">Enrollment Number</label>
+              <input type="text" id="forgotEnrollment" class="cu-input" placeholder="e.g. 22CUCSE001" autocomplete="off" required>
+            </div>
+            <button type="submit" class="cu-btn" style="width:100%;margin-top:.5rem">Send Reset Link</button>
+          </form>
+          <p style="text-align:center;margin-top:.75rem;font-size:.84rem">
+            <a href="#" id="backToLoginLink" style="color:var(--primary);font-weight:600">← Back to Login</a>
+          </p>
+        </div>
+        <div id="forgotStep2" style="display:none;text-align:center;padding:1rem 0">
+          <div style="font-size:2.5rem;margin-bottom:1rem">📧</div>
+          <h3 style="margin:0 0 .5rem;font-size:1.1rem;font-weight:800">Check Your Email</h3>
+          <p id="forgotSentMsg" style="margin:0 0 1.25rem;font-size:.85rem;color:var(--text-muted);line-height:1.6"></p>
+          <p style="font-size:.8rem;color:var(--text-muted);line-height:1.6">Click the link in the email to reset your password. The link expires in <strong>15 minutes</strong>.</p>
+          <p style="margin-top:1rem;font-size:.82rem;color:var(--text-muted)">Didn't get it? Check spam folder.</p>
+          <p style="margin-top:.5rem"><a href="#" id="backToLoginLink2" style="color:var(--primary);font-size:.84rem;font-weight:600">← Back to Login</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── Reset Password Modal (shown when user clicks email link) ── -->
+  <div class="modal-overlay" id="resetPassModal" style="display:none">
+    <div class="modal-box" style="max-width:420px;width:100%">
+      <div class="modal-head">
+        <h3>Set New Password</h3>
+      </div>
+      <div style="padding:1.25rem">
+        <p style="margin:0 0 1.25rem;font-size:.85rem;color:var(--text-muted);line-height:1.5">Enter a new password for your CU Hub account. Must be at least 8 characters with letters and numbers.</p>
+        <form id="resetPassForm">
+          <input type="hidden" id="resetToken">
+          <div class="form-group">
+            <label class="cu-label">New Password</label>
+            <input type="password" id="resetNewPass" class="cu-input" placeholder="Min 8 chars, include a number" maxlength="128" required>
+          </div>
+          <div class="form-group" style="margin-top:.75rem">
+            <label class="cu-label">Confirm Password</label>
+            <input type="password" id="resetConfirmPass" class="cu-input" placeholder="Re-enter new password" maxlength="128" required>
+          </div>
+          <button type="submit" class="cu-btn" style="width:100%;margin-top:1rem">Reset Password</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ════ POST MODALS ════ -->
+  <div class="modal-overlay" id="postModalOverlay" style="display:none" onclick="if(event.target===this)PostModals.close()">
+    <div class="modal-box" id="postModalBox"></div>
+  </div>
+
+  <!-- ════ DETAIL MODAL ════ -->
+  <div id="detailModalOverlay">
+    <div id="detailModalBox"></div>
+  </div>
+  <!-- ════ MOBILE BOTTOM NAV ════ -->
+  <nav class="mob-bottom-nav" id="mobBottomNav">
+    <button class="mob-nav-btn active" data-page="dashboard" id="mbn-dashboard">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Home
+    </button>
+    <button class="mob-nav-btn" data-page="marketplace" id="mbn-marketplace">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      Market
+    </button>
+    <button class="mob-nav-btn" data-page="notes" id="mbn-notes">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+      Notes
+    </button>
+    <button class="mob-nav-btn" data-page="events" id="mbn-events">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+      Events
+    </button>
+    <button class="mob-nav-btn" data-page="bookmarks" id="mbn-bookmarks">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
+      <span class="mob-nav-badge" id="mobBmBadge" style="display:none">0</span>
+      Saved
+    </button>
+  </nav>
+
+  <div id="sidebarOverlay" class="sidebar-overlay"></div>
+  <div id="toastContainer"></div>
+  <!-- AI FAB -->
+  <button class="ai-fab" id="aiFab" title="AI Assistant" aria-label="Open AI Assistant">
+    <div class="ai-fab-ring"></div>
+    <svg class="ai-fab-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><circle cx="9" cy="10" r="1" fill="currentColor"/><circle cx="12" cy="10" r="1" fill="currentColor"/><circle cx="15" cy="10" r="1" fill="currentColor"/></svg>
+    <span class="ai-fab-badge" id="aiFabBadge" style="display:none">1</span>
+  </button>
+
+  <!-- AI Popup Panel -->
+  <div class="ai-popup" id="aiPopup" role="dialog" aria-label="CURAJ AI Assistant">
+    <!-- Header -->
+    <div class="aip-header">
+      <div class="aip-avatar">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" width="22" height="22">
+          <circle cx="16" cy="16" r="16" fill="rgba(255,255,255,0.15)"/>
+          <path d="M10 13c0-3.314 2.686-6 6-6s6 2.686 6 6v1H10v-1z" fill="#fff"/>
+          <rect x="8" y="14" width="16" height="9" rx="3" fill="#fff"/>
+          <circle cx="13" cy="18" r="1.5" fill="rgba(91,95,199,0.8)"/>
+          <circle cx="19" cy="18" r="1.5" fill="rgba(91,95,199,0.8)"/>
+          <path d="M13 21.5c.8.7 2.4 1 3 1s2.2-.3 3-1" stroke="rgba(91,95,199,0.8)" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="aip-header-info">
+        <div class="aip-title">CURAJ Assistant</div>
+        <div class="aip-status"><span class="aip-dot"></span>Online · CURAJ AI</div>
+      </div>
+      <div class="aip-header-actions">
+        <button class="aip-icon-btn" id="aiClearBtn" title="Clear chat" aria-label="Clear chat">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.88"/></svg>
+        </button>
+        <button class="aip-icon-btn aip-close" id="aiPopupClose" title="Close" aria-label="Close assistant">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="aip-quick" id="aiPopupQuick">
+      <button class="aip-chip" onclick="aiPopupSend('Go to Marketplace')">🛒 Marketplace</button>
+      <button class="aip-chip" onclick="aiPopupSend('Go to Events')">🗓️ Events</button>
+      <button class="aip-chip" onclick="aiPopupSend('Hostel fees and rules?')">🏠 Hostel</button>
+      <button class="aip-chip" onclick="aiPopupSend('Mess fee and food details?')">🍽️ Mess</button>
+      <button class="aip-chip" onclick="aiPopupSend('Library timings?')">📚 Library</button>
+      <button class="aip-chip" onclick="aiPopupSend('Exam schedule and CIA marks?')">📝 Exams</button>
+      <button class="aip-chip" onclick="aiPopupSend('Fee payment and course fees?')">💰 Fees</button>
+      <button class="aip-chip" onclick="aiPopupSend('Tell me about CURAJ university')">🎓 About CURAJ</button>
+    </div>
+
+    <!-- Messages -->
+    <div class="aip-msgs" id="aiPopupMsgs"></div>
+
+    <!-- Input -->
+    <div class="aip-input-wrap">
+      <div class="aip-input-row">
+        <input type="search" class="aip-input" id="aiPopupInput"
+          placeholder="Tell me about CURAJ…"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="off"
+          spellcheck="false"
+          inputmode="text"
+          enterkeyhint="send"
+          name="search"
+          readonly
+          onfocus="this.removeAttribute('readonly')"
+          maxlength="500">
+        <button class="aip-send" id="aiPopupSendBtn" aria-label="Send message">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="aip-footer-note">CURAJ AI Assistant · For campus info only</div>
+    </div>
+  </div>
+
+  <!-- AI Overlay (mobile backdrop) -->
+  <div class="ai-overlay" id="aiOverlay"></div>
+
+  <!-- Scripts — ORDER MATTERS -->
+  <script src="js/core/security.js?v=25"></script>
+  <script src="js/core/curaj-data.js?v=25"></script>
+  <script src="js/core/utils.js?v=25"></script>
+  <script src="js/core/theme.js?v=25"></script>
+  <script src="js/core/router.js?v=25"></script>
+  <script src="js/core/avatar.js?v=25"></script>
+  <script src="js/services/api.js?v=25"></script>
+  <script src="js/services/authService.js?v=25"></script>
+  <script src="js/modules/auth/index.js?v=25"></script>
+  <script src="js/modules/detail-modal.js?v=25"></script>
+  <script src="js/modules/marketplace/index.js?v=25"></script>
+  <script src="js/modules/lostfound/index.js?v=25"></script>
+  <script src="js/modules/notes/index.js?v=25"></script>
+  <script src="js/modules/events/index.js?v=25"></script>
+  <script src="js/modules/bookmarks/index.js?v=25"></script>
+  <script src="js/modules/ai/index.js?v=25"></script>
+  <script src="js/modules/ai/popup.js?v=25"></script>
+  <script src="js/modules/post-modals.js?v=25"></script>
+  <script src="js/modules/profile/index.js?v=25"></script>
+  <script src="js/core/app.js?v=25"></script>
+
+  <!-- ════ PROFILE MODAL ════ -->
+  <div class="pmodal-overlay" id="profileModal">
+    <div class="pmodal">
+      <!-- Header -->
+      <div class="pmodal-header">
+        <h2 class="pmodal-title">My Profile</h2>
+        <button class="pmodal-close" id="profileModalClose" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- VIEW MODE -->
+      <div id="pmodeView">
+        <div class="pmodal-hero">
+          <div class="pmodal-ava-wrap">
+            <img id="pmViewAva" src="" alt="Avatar" class="pmodal-ava" onerror="if(window.CUAvatar&&window.AuthService){const u=AuthService.getUser();this.src=CUAvatar.generate(u?u.name:'U',80);this.onerror=null;}">
+            <div class="pmodal-ava-online"></div>
+          </div>
+          <div class="pmodal-hero-info">
+            <h3 id="pmViewName" class="pmodal-name"></h3>
+            <p id="pmViewEnroll" class="pmodal-enroll"></p>
+            <p id="pmViewBio" class="pmodal-bio"></p>
+          </div>
+        </div>
+        <div class="pmodal-fields">
+          <div class="pmodal-field">
+            <span class="pmodal-field-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              Department
+            </span>
+            <span id="pmViewDept" class="pmodal-field-val"></span>
+          </div>
+          <div class="pmodal-field">
+            <span class="pmodal-field-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+              Program
+            </span>
+            <span id="pmViewProgram" class="pmodal-field-val"></span>
+          </div>
+          <div class="pmodal-field">
+            <span class="pmodal-field-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              Year / Semester
+            </span>
+            <span id="pmViewYear" class="pmodal-field-val"></span>
+          </div>
+          <div class="pmodal-field">
+            <span class="pmodal-field-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.94-2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21.72 17z"/></svg>
+              Phone
+            </span>
+            <span id="pmViewPhone" class="pmodal-field-val"></span>
+          </div>
+          <div class="pmodal-field">
+            <span class="pmodal-field-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Member Since
+            </span>
+            <span id="pmViewJoined" class="pmodal-field-val"></span>
+          </div>
+        </div>
+        <div class="pmodal-actions">
+          <button class="pmodal-btn-edit" id="pmEditBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            Edit Profile
+          </button>
+          <button class="pmodal-btn-cancel" id="pmChangePassBtn" style="margin-top:.5rem;width:100%">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Change Password
+          </button>
+        </div>
+      </div>
+
+      <!-- CHANGE PASSWORD MODE -->
+      <div id="pmodeChangePass" style="display:none">
+        <div class="pmodal-form" style="padding-top:.5rem">
+          <div class="pmodal-form-group">
+            <label class="pmodal-label">Current Password <span class="pmodal-required">*</span></label>
+            <input type="password" id="pmCurrentPass" class="pmodal-input" placeholder="Your current password" maxlength="128" autocomplete="current-password">
+          </div>
+          <div class="pmodal-form-group">
+            <label class="pmodal-label">New Password <span class="pmodal-required">*</span></label>
+            <input type="password" id="pmNewPass" class="pmodal-input" placeholder="Min 8 chars, include a number" maxlength="128" autocomplete="new-password">
+            <div id="pmPassStrengthBar" style="height:4px;border-radius:4px;margin-top:6px;width:0;transition:width .3s,background .3s"></div>
+            <div id="pmPassStrengthHint" style="font-size:.75rem;margin-top:3px;color:var(--text-muted)"></div>
+          </div>
+          <div class="pmodal-form-group">
+            <label class="pmodal-label">Confirm New Password <span class="pmodal-required">*</span></label>
+            <input type="password" id="pmConfirmPass" class="pmodal-input" placeholder="Re-enter new password" maxlength="128" autocomplete="new-password">
+          </div>
+        </div>
+        <div class="pmodal-actions pmodal-edit-actions">
+          <button class="pmodal-btn-cancel" id="pmCancelPassBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Cancel
+          </button>
+          <button class="pmodal-btn-save" id="pmSavePassBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Update Password
+          </button>
+        </div>
+      </div>
+
+      <!-- EDIT MODE -->
+      <div id="pmodeEdit" style="display:none">
+        <div class="pmodal-edit-ava-section">
+          <div class="pmodal-ava-wrap pmodal-ava-editwrap">
+            <img id="pmEditAva" src="" alt="Avatar" class="pmodal-ava" onerror="if(window.CUAvatar&&window.AuthService){const u=AuthService.getUser();this.src=CUAvatar.generate(u?u.name:'U',80);this.onerror=null;}">
+            <label class="pmodal-ava-change" for="pmAvaInput" title="Change photo">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </label>
+            <input type="file" id="pmAvaInput" accept="image/*" style="display:none">
+          </div>
+          <p class="pmodal-ava-hint">Tap camera icon to change photo</p>
+        </div>
+        <div class="pmodal-form">
+
+          <!-- Full Name -->
+          <div class="pmodal-form-group">
+            <label class="pmodal-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+              Full Name <span class="pmodal-required">*</span>
+            </label>
+            <input type="text" id="pmEditName" class="pmodal-input" placeholder="Your full name" maxlength="100" autocomplete="name">
+          </div>
+
+          <!-- Bio -->
+          <div class="pmodal-form-group">
+            <label class="pmodal-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              Bio
+            </label>
+            <textarea id="pmEditBio" class="pmodal-input pmodal-textarea" placeholder="Tell something about yourself…" maxlength="300" rows="2"></textarea>
+            <span class="pmodal-char-count"><span id="pmBioCount">0</span>/300</span>
+          </div>
+
+          <!-- Department -->
+          <div class="pmodal-form-group">
+            <label class="pmodal-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+              Department
+            </label>
+            <div class="pmodal-select-wrap">
+              <select id="pmEditDept" class="pmodal-input pmodal-select">
+                <option value="">Select Department</option>
+              </select>
+              <svg class="pmodal-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+            </div>
+          </div>
+
+          <!-- Program + Semester row -->
+          <div class="pmodal-form-row">
+            <div class="pmodal-form-group">
+              <label class="pmodal-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                Program
+              </label>
+              <div class="pmodal-select-wrap">
+                <select id="pmEditProgram" class="pmodal-input pmodal-select">
+                  <option value="">Select Dept. first</option>
+                </select>
+                <svg class="pmodal-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+            <div class="pmodal-form-group">
+              <label class="pmodal-label">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/></svg>
+                Semester
+              </label>
+              <div class="pmodal-select-wrap">
+                <select id="pmEditSemester" class="pmodal-input pmodal-select">
+                  <option value="">Select Program first</option>
+                </select>
+                <svg class="pmodal-select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Phone -->
+          <div class="pmodal-form-group">
+            <label class="pmodal-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13.5 19.79 19.79 0 0 1 1.61 5a2 2 0 0 1 1.94-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 10.1a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21.72 17z"/></svg>
+              Phone Number
+            </label>
+            <input type="tel" id="pmEditPhone" class="pmodal-input" placeholder="10-digit mobile number" maxlength="10" autocomplete="tel">
+          </div>
+
+          <!-- Enrollment (read-only) -->
+          <div class="pmodal-form-group">
+            <label class="pmodal-label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              Enrollment No.
+            </label>
+            <div class="pmodal-readonly-wrap">
+              <input type="text" id="pmEditEnroll" class="pmodal-input pmodal-readonly" disabled>
+              <span class="pmodal-lock-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+              </span>
+            </div>
+            <span class="pmodal-field-hint">Enrollment number cannot be changed</span>
+          </div>
+
+        </div>
+        <div class="pmodal-actions pmodal-edit-actions">
+          <button class="pmodal-btn-cancel" id="pmCancelBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            Cancel
+          </button>
+          <button class="pmodal-btn-save" id="pmSaveBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            Save Changes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

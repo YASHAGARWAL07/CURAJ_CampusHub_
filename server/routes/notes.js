@@ -1,0 +1,10 @@
+'use strict';
+const router=require('express').Router();
+const C=require('../controllers/notesController');
+const {rateLimit,requireAuth,upload,uploadDoc,handleUploadError,validateUpload}=require('../middleware');
+router.get('/',              rateLimit(60,60000), C.list);
+router.post('/',             requireAuth, rateLimit(20,3600000), uploadDoc.single('file'), handleUploadError, validateUpload, C.create);
+router.delete('/:id',        requireAuth, C.remove);
+router.post('/:id/download', rateLimit(200,60000), C.trackDownload);
+router.get('/:id/file',      rateLimit(60,600000), C.getFile);
+module.exports=router;
